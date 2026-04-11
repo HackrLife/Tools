@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HackrTools — Tools for Founders & Operators</title>
+  <meta name="description" content="A browser-based toolkit for founders, operators, and growth thinkers. Built from 15 years of practice across Google, SAP, Adobe, LinkedIn, and IBM." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300;1,9..144,600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0b0b0b;
+      --sf:       #111111;
+      --card:     #141414;
+      --border:   rgba(255,255,255,0.07);
+      --tx:       #ede9e3;
+      --mu:       #5a5a5a;
+      --mu2:      #888;
+      --accent:   #c8f135;
+      --mono:     'DM Mono', monospace;
+      --serif:    'Fraunces', Georgia, serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--tx);
+      font-family: var(--mono);
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Grain ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(11,11,11,0.9);
+      backdrop-filter: blur(16px);
+    }
+
+    .logo {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--tx);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .logo span { color: var(--accent); }
+
+    .nav-right {
+      font-size: 0.68rem;
+      color: var(--mu);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 7rem 2.5rem 5rem;
+    }
+
+    .eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 6.5vw, 4.8rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.06;
+      letter-spacing: -0.025em;
+      color: var(--tx);
+      margin-bottom: 1.75rem;
+      max-width: 780px;
+    }
+
+    h1 strong {
+      font-weight: 600;
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-body {
+      max-width: 540px;
+      color: var(--mu2);
+      font-size: 0.85rem;
+      line-height: 1.8;
+    }
+
+    .hero-body p + p { margin-top: 0.75rem; }
+
+    /* ── Divider ── */
+    .divider {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── Tools section ── */
+    .tools {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 4rem 2.5rem 8rem;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mu);
+    }
+
+    .section-count {
+      font-size: 0.68rem;
+      color: var(--mu);
+    }
+
+    /* ── Filter tabs ── */
+    .filters {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .filter-btn {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mu2);
+      background: none;
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.85rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .filter-btn:hover {
+      border-color: rgba(255,255,255,0.2);
+      color: var(--tx);
+    }
+
+    .filter-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #0b0b0b;
+    }
+
+    /* ── Tool grid ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    /* ── Tool card ── */
+    .card {
+      background: var(--card);
+      padding: 1.75rem;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+
+    .card:hover { background: #1a1a1a; }
+
+    .card:hover .card-arrow { transform: translate(3px, -3px); opacity: 1; }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .card-category {
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mu);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.5rem;
+    }
+
+    .card-arrow {
+      font-size: 0.9rem;
+      color: var(--accent);
+      opacity: 0;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .card-name {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--tx);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .card-desc {
+      font-size: 0.78rem;
+      color: var(--mu2);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .card-status {
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .card-status.live { color: var(--accent); }
+    .card-status.live::before {
+      content: '';
+      display: block;
+      width: 5px;
+      height: 5px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .card-status.soon { color: var(--mu); }
+    .card-status.soon::before {
+      content: '';
+      display: block;
+      width: 5px;
+      height: 5px;
+      background: var(--mu);
+      border-radius: 50%;
+    }
+
+    .card-cta {
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mu);
+      transition: color 0.15s;
+    }
+
+    .card:hover .card-cta { color: var(--accent); }
+
+    /* Coming soon card — locked state */
+    .card.soon-card {
+      opacity: 0.45;
+      pointer-events: none;
+    }
+
+    /* ── About strip ── */
+    .about {
+      border-top: 1px solid var(--border);
+      background: var(--sf);
+    }
+
+    .about-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 4rem 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .about-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mu);
+      padding-top: 0.25rem;
+    }
+
+    .about-text {
+      font-size: 0.85rem;
+      color: var(--mu2);
+      line-height: 1.85;
+    }
+
+    .about-text p + p { margin-top: 1rem; }
+
+    .about-text strong { color: var(--tx); font-weight: 500; }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--mu);
+      text-decoration: none;
+    }
+
+    .footer-logo span { color: var(--accent); }
+
+    .footer-copy {
+      font-size: 0.68rem;
+      color: var(--mu);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Fade in ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fadeUp 0.7s ease forwards;
+    }
+
+    .fade-up:nth-child(1) { animation-delay: 0.05s; }
+    .fade-up:nth-child(2) { animation-delay: 0.12s; }
+    .fade-up:nth-child(3) { animation-delay: 0.19s; }
+    .fade-up:nth-child(4) { animation-delay: 0.26s; }
+    .fade-up:nth-child(5) { animation-delay: 0.33s; }
+    .fade-up:nth-child(6) { animation-delay: 0.40s; }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.25rem; }
+      .hero { padding: 4rem 1.25rem 3rem; }
+      .tools { padding: 2.5rem 1.25rem 5rem; }
+      .about-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+      footer { flex-direction: column; gap: 1rem; align-items: flex-start; padding: 1.5rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <a href="/" class="logo">Hackr<span>Tools</span></a>
+    <span class="nav-right">hackrtools.com</span>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="eyebrow">Built from practice, not theory</div>
+    <h1>Tools that work<br>in <strong>the real world</strong></h1>
+    <div class="hero-body">
+      <p>A browser-based toolkit for founders, operators, and growth thinkers — built from 15 years of GTM, growth, and demand generation work across Google, SAP, Adobe, LinkedIn, and IBM.</p>
+      <p>These are the tools that get used on the job. No data leaves your browser.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Tools -->
+  <section class="tools">
+    <div class="section-head">
+      <span class="section-label">Tools</span>
+      <span class="section-count" id="tool-count"></span>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="growth">Growth</button>
+      <button class="filter-btn" data-filter="mental-models">Mental Models</button>
+      <button class="filter-btn" data-filter="marketing">Digital Marketing</button>
+      <button class="filter-btn" data-filter="sops">SOPs</button>
+      <button class="filter-btn" data-filter="agentic">Agentic</button>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid" id="tool-grid"></div>
+  </section>
+
+  <!-- About -->
+  <section class="about">
+    <div class="about-inner">
+      <div class="about-label">About</div>
+      <div class="about-text">
+        <p>After 15 years across growth, GTM, product ownership, and demand generation at <strong>Google, SAP, Adobe, LinkedIn, and IBM</strong>, I built these tools for myself — to solve real problems on the job.</p>
+        <p>Most calculators and frameworks you find online are built by people who have read about these problems. These are built by someone who has lived them — across startups, scale-ups, and enterprise. They reflect how senior operators actually think, not how consultants present things in decks.</p>
+        <p>Every tool in this collection has been used in practice. The frameworks are the ones that held up under pressure.</p>
+        <p><strong>HackrTools is what I wished existed when I was figuring this out.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <a href="/" class="footer-logo">Hackr<span>Tools</span></a>
+    <span class="footer-copy">HackrLife Media LLC</span>
+  </footer>
+
+  <script>
+    const TOOLS = [
+      {
+        name: 'SaaS Vitals',
+        category: 'growth',
+        categoryLabel: 'Growth',
+        desc: 'Model CAC, LTV, churn, payback period, and revenue retention. Built around how operators actually think about SaaS unit economics.',
+        status: 'live',
+        url: 'tools/saas-vitals/',
+      },
+      {
+        name: 'Fundraising Dilution Calculator',
+        category: 'growth',
+        categoryLabel: 'Growth',
+        desc: 'Model equity dilution across funding rounds. See how SAFEs, priced rounds, and option pool expansions affect founder ownership.',
+        status: 'soon',
+        url: null,
+      },
+      {
+        name: 'ICP Builder',
+        category: 'growth',
+        categoryLabel: 'Growth',
+        desc: 'Structure your Ideal Customer Profile with the rigour it deserves — firmographics, behavioural signals, and buying triggers.',
+        status: 'soon',
+        url: null,
+      },
+      {
+        name: 'First-Principles Canvas',
+        category: 'mental-models',
+        categoryLabel: 'Mental Models',
+        desc: 'Break any problem down to its foundational truths. An interactive canvas for structured first-principles reasoning.',
+        status: 'soon',
+        url: null,
+      },
+      {
+        name: 'Campaign Budget Allocator',
+        category: 'marketing',
+        categoryLabel: 'Digital Marketing',
+        desc: 'Allocate budget across channels based on expected CPL, conversion rates, and pipeline targets. No more spreadsheet gymnastics.',
+        status: 'soon',
+        url: null,
+      },
+      {
+        name: 'GTM Motion Selector',
+        category: 'sops',
+        categoryLabel: 'SOPs',
+        desc: 'Diagnose whether your business should be product-led, sales-led, or marketing-led — and what that means for your next 90 days.',
+        status: 'soon',
+        url: null,
+      },
+    ];
+
+    const grid = document.getElementById('tool-grid');
+    const countEl = document.getElementById('tool-count');
+    let activeFilter = 'all';
+
+    function renderTools() {
+      const filtered = activeFilter === 'all'
+        ? TOOLS
+        : TOOLS.filter(t => t.category === activeFilter);
+
+      const live = filtered.filter(t => t.status === 'live').length;
+      countEl.textContent = `${live} live · ${filtered.length - live} coming`;
+
+      grid.innerHTML = '';
+      filtered.forEach((tool, i) => {
+        const el = document.createElement(tool.url ? 'a' : 'div');
+        if (tool.url) el.href = tool.url;
+        el.className = `card fade-up${tool.status === 'soon' ? ' soon-card' : ''}`;
+        el.style.animationDelay = `${i * 0.07}s`;
+        el.innerHTML = `
+          <div class="card-top">
+            <span class="card-category">${tool.categoryLabel}</span>
+            <span class="card-arrow">↗</span>
+          </div>
+          <div class="card-name">${tool.name}</div>
+          <div class="card-desc">${tool.desc}</div>
+          <div class="card-footer">
+            <span class="card-status ${tool.status}">${tool.status === 'live' ? 'Live' : 'Coming soon'}</span>
+            <span class="card-cta">${tool.status === 'live' ? 'Open tool' : ''}</span>
+          </div>
+        `;
+        grid.appendChild(el);
+      });
+    }
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeFilter = btn.dataset.filter;
+        renderTools();
+      });
+    });
+
+    renderTools();
+  </script>
+</body>
+</html>
