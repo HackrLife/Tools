@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SaaS Vitals — HackrLife Tools</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--b:#080c10;--b2:#0d1117;--b3:#131920;--b4:#1a2330;--br:#1e2d3d;--br2:#243447;--a:#f0a500;--ad:#a07020;--ag:rgba(240,165,0,.12);--g:#00d4aa;--gd:#008a6e;--r:#ff4d6a;--rd:#8a1a2a;--t:#c8d8e8;--td:#6a8a9a;--tb:#e8f4ff;--m:'IBM Plex Mono',monospace;--s:'IBM Plex Sans',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--b);color:var(--t);font-family:var(--s);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(240,165,0,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(240,165,0,.025) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
+body::after{content:'';position:fixed;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(240,165,0,.05),transparent 70%);pointer-events:none;z-index:0}
+.w{max-width:980px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+/* HEADER */
+header{padding:32px 0 24px;border-bottom:1px solid var(--br)}
+.hi{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{font-family:var(--m);font-size:11px;color:var(--a);letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.brand::before{content:'';width:6px;height:6px;background:var(--a);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+h1{font-family:var(--m);font-size:clamp(18px,4vw,26px);font-weight:600;color:var(--tb);letter-spacing:-.02em;line-height:1.2}
+.sub{font-size:13px;color:var(--td);margin-top:6px;max-width:500px;line-height:1.5}
+.tag{font-family:var(--m);font-size:10px;color:var(--td);border:1px solid var(--br2);padding:4px 10px;border-radius:2px;white-space:nowrap;margin-top:4px}
+/* TABS */
+.tabs{display:flex;border-bottom:1px solid var(--br);margin-top:28px}
+.tb{font-family:var(--m);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--td);background:none;border:none;border-bottom:2px solid transparent;padding:12px 24px 10px;cursor:pointer;transition:all .2s;position:relative;top:1px}
+.tb:hover{color:var(--t)}
+.tb.on{color:var(--a);border-bottom-color:var(--a)}
+.tp{display:none;padding:28px 0}
+.tp.on{display:block}
+/* SHARED CARD */
+.c{background:var(--b2);border:1px solid var(--br);border-radius:4px;padding:20px;margin-bottom:14px}
+/* INPUT CARDS */
+.is{background:var(--b2);border:1px solid var(--br);border-radius:4px;padding:16px 20px;margin-bottom:14px}
+.isg{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ig{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px}
+.ic{background:var(--b2);border:1px solid var(--br);border-radius:4px;padding:16px 18px;display:flex;flex-direction:column;gap:8px;position:relative;overflow:hidden;transition:border-color .2s}
+.ic:focus-within{border-color:var(--ad)}
+.ic::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--br2);transition:background .2s}
+.ic:focus-within::after{background:var(--a)}
+.icg{font-family:var(--m);font-size:9px;color:var(--a);letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+.icl{font-size:13px;font-weight:600;color:var(--tb);line-height:1.3}
+.ica{font-family:var(--m);font-size:10px;color:var(--td);letter-spacing:.08em}
+.ich{font-size:11px;color:var(--td);line-height:1.5}
+/* FIELD */
+.f{display:flex;flex-direction:column;gap:6px}
+.f label{font-family:var(--m);font-size:10px;color:var(--td);letter-spacing:.1em;text-transform:uppercase}
+.h{font-size:11px;color:var(--td);opacity:.7;line-height:1.4}
+/* INPUT WRAP */
+.iw{display:flex;align-items:center;background:var(--b3);border:1px solid var(--br2);border-radius:3px;transition:border-color .2s}
+.iw:focus-within{border-color:var(--a);box-shadow:0 0 0 2px var(--ag)}
+.iw.inv{border-color:var(--r)!important}
+.ip,.isuf{font-family:var(--m);font-size:13px;color:var(--ad);padding:0 10px;height:38px;display:flex;align-items:center;white-space:nowrap;flex-shrink:0}
+.ip{border-right:1px solid var(--br)}
+.isuf{border-left:1px solid var(--br)}
+input[type=number],select{background:transparent;border:none;outline:none;color:var(--tb);font-family:var(--m);font-size:14px;padding:0 12px;height:38px;width:100%;-moz-appearance:textfield}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none}
+select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236a8a9a'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:30px}
+/* SLIDER */
+.sr{display:flex;align-items:center;gap:10px}
+.sr input[type=range]{flex:1;height:3px;-webkit-appearance:none;appearance:none;background:var(--br2);border-radius:2px;outline:none;cursor:pointer}
+.sr input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;background:var(--a);border-radius:50%;cursor:pointer;box-shadow:0 0 8px var(--ag)}
+.sn{width:80px;flex-shrink:0}
+/* BUTTON */
+.btn{width:100%;margin-top:10px;padding:14px 24px;background:var(--a);color:#080c10;font-family:var(--m);font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;border:none;border-radius:3px;cursor:pointer;transition:all .2s}
+.btn:hover{background:#ffc020;box-shadow:0 4px 20px rgba(240,165,0,.3);transform:translateY(-1px)}
+.btn:active{transform:none}
+.err{font-family:var(--m);font-size:11px;color:var(--r);margin-bottom:10px;display:none}
+/* RESULTS */
+.rh{display:none}
+.nb{background:rgba(255,77,106,.08);border:1px solid var(--rd);border-left:3px solid var(--r);border-radius:3px;padding:14px 18px;margin-bottom:16px;animation:fu .3s ease both}
+.nbt{font-family:var(--m);font-size:11px;color:var(--r);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.nb p{font-size:13px;color:var(--t);line-height:1.7}
+/* VERDICT */
+.vr{display:flex;align-items:center;gap:12px;padding:14px 18px;background:var(--b3);border:1px solid var(--br2);border-radius:3px;margin-bottom:16px;flex-wrap:wrap;animation:fu .3s ease both}
+.vl{font-family:var(--m);font-size:10px;color:var(--td);letter-spacing:.1em;text-transform:uppercase}
+.vs{font-size:10px;color:var(--td);opacity:.6;font-style:italic;flex-basis:100%;margin-top:2px}
+.vb{font-family:var(--m);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:5px 14px;border-radius:2px}
+.vb.efficient{background:rgba(0,212,170,.15);color:var(--g);border:1px solid var(--gd)}
+.vb.healthy{background:rgba(0,212,170,.08);color:var(--g);border:1px solid var(--gd)}
+.vb.borderline{background:rgba(240,165,0,.12);color:var(--a);border:1px solid var(--ad)}
+.vb.weak{background:rgba(255,77,106,.1);color:var(--r);border:1px solid var(--rd)}
+.vb.unsustainable{background:rgba(255,77,106,.18);color:var(--r);border:1px solid var(--rd)}
+.np{font-family:var(--m);font-size:11px;padding:4px 12px;border-radius:2px;margin-left:auto}
+.np.good{background:rgba(0,212,170,.1);color:var(--g);border:1px solid var(--gd)}
+.np.warn{background:rgba(240,165,0,.1);color:var(--a);border:1px solid var(--ad)}
+.np.bad{background:rgba(255,77,106,.1);color:var(--r);border:1px solid var(--rd)}
+/* METRICS */
+.mg{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:16px}
+.mt{background:var(--b3);border:1px solid var(--br2);border-radius:3px;padding:14px 16px;position:relative;overflow:hidden;animation:fu .35s ease both}
+.mt::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--br2)}
+.mt.ac::before{background:var(--a)}
+@keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.mt:nth-child(1){animation-delay:.04s}.mt:nth-child(2){animation-delay:.08s}.mt:nth-child(3){animation-delay:.12s}.mt:nth-child(4){animation-delay:.16s}.mt:nth-child(5){animation-delay:.20s}.mt:nth-child(6){animation-delay:.24s}.mt:nth-child(7){animation-delay:.28s}
+.ml{font-family:var(--m);font-size:9px;color:var(--td);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.mv{font-family:var(--m);font-size:clamp(16px,2.5vw,22px);font-weight:600;color:var(--tb);line-height:1}
+.mv.good{color:var(--g)}.mv.warn{color:var(--a)}.mv.bad{color:var(--r)}
+.ms{font-size:10px;color:var(--td);margin-top:6px;line-height:1.4}
+.mf{font-family:var(--m);font-size:10px;margin-top:6px;padding:3px 8px;border-radius:2px;display:inline-block}
+.mf.warn{background:rgba(240,165,0,.12);color:var(--a)}.mf.bad{background:rgba(255,77,106,.12);color:var(--r)}
+/* CHART */
+.cw{width:100%}
+canvas{width:100%!important;border-radius:2px}
+.cn{font-family:var(--m);font-size:10px;color:var(--td);margin-top:10px;display:flex;gap:16px;flex-wrap:wrap}
+.cn span{display:flex;align-items:center;gap:5px}
+.dot{width:8px;height:3px;border-radius:1px;display:inline-block}
+/* DIAGNOSTIC */
+.dg{background:var(--b3);border:1px solid var(--br2);border-left:3px solid var(--a);border-radius:3px;padding:16px 20px;animation:fu .35s .32s ease both}
+.dgt{font-family:var(--m);font-size:10px;color:var(--a);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
+.dg p{font-size:13px;color:var(--t);line-height:1.75}
+.dg p+p{margin-top:8px}
+/* MATHS CARDS */
+.mi{background:var(--b2);border:1px solid var(--br);border-left:3px solid var(--a);border-radius:4px;padding:16px 20px;margin-bottom:20px;display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+.mil{font-family:var(--m);font-size:10px;color:var(--a);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+.mi p{font-size:13px;color:var(--t);line-height:1.6}
+.mcg{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.mc{background:var(--b2);border:1px solid var(--br);border-radius:4px;padding:18px 20px;display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden}
+.mc::before{content:'';position:absolute;top:0;left:0;bottom:0;width:2px;background:var(--a);opacity:.4}
+.mcf{grid-column:1/-1}
+.mcs{font-family:var(--m);font-size:10px;color:var(--a);letter-spacing:.12em;opacity:.7}
+.mct{font-family:var(--m);font-size:13px;font-weight:600;color:var(--tb);line-height:1.3}
+.mctag{font-size:10px;font-weight:400;color:var(--r);background:rgba(255,77,106,.1);border:1px solid var(--rd);border-radius:2px;padding:2px 7px;margin-left:8px;vertical-align:middle;letter-spacing:.06em}
+.mcfm{font-family:var(--m);font-size:12px;color:var(--a);background:var(--b3);border:1px solid var(--br2);border-radius:3px;padding:8px 12px;line-height:1.6}
+.mcfmg{display:flex;flex-direction:column;gap:6px}
+.mcb{font-size:12px;color:var(--t);line-height:1.65}
+.mcns{display:flex;flex-direction:column;gap:8px}
+.mcn,.mn{font-family:var(--m);font-size:11px;color:var(--t);background:var(--b4);border:1px solid var(--br);border-radius:3px;padding:9px 12px;line-height:1.6}
+.mcn span,.mn span{color:var(--a)}
+.mc .wk,.mcfm+.wk{font-family:var(--m);font-size:12px;color:var(--g);background:rgba(0,212,170,.05);border:1px solid rgba(0,212,170,.15);border-radius:3px;padding:8px 12px;line-height:1.6}
+.wk.hidden{display:none}
+/* FULL CARDS */
+.mfc{background:var(--b2);border:1px solid var(--br);border-radius:4px;padding:20px 22px;margin-bottom:14px}
+.mft{font-family:var(--m);font-size:11px;color:var(--a);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--br)}
+.mfd{font-size:12px;color:var(--t);line-height:1.6;margin-bottom:16px}
+/* THRESH */
+.tg{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.tc{background:var(--b3);border:1px solid var(--br2);border-radius:3px;padding:12px 14px}
+.tct{font-family:var(--m);font-size:10px;color:var(--a);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--br)}
+.tr{display:grid;grid-template-columns:16px 1fr auto;gap:4px;align-items:baseline;padding:4px 0;border-bottom:1px solid rgba(30,45,61,.5);font-family:var(--m);font-size:11px;color:var(--t)}
+.tr:last-child{border-bottom:none}
+.tr span:last-child{color:var(--td);font-size:10px;text-align:right}
+/* ASSUMPTIONS */
+.ag{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ab{background:var(--b3);border:1px solid var(--br2);border-radius:3px;padding:14px 16px}
+.al{font-family:var(--m);font-size:10px;color:var(--a);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.ab p{font-size:12px;color:var(--t);line-height:1.65}
+/* COLOR DOTS */
+.dg2{color:var(--g)}.dw{color:var(--a)}.db{color:var(--r)}
+/* FOOTER */
+footer{border-top:1px solid var(--br);padding:18px 0;margin-top:40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+footer span{font-family:var(--m);font-size:10px;color:var(--td);letter-spacing:.06em}
+footer a{color:var(--a);text-decoration:none}
+/* RESPONSIVE */
+@media(max-width:700px){.ig{grid-template-columns:1fr 1fr}.tg{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.mcg{grid-template-columns:1fr}.ag{grid-template-columns:1fr}}
+@media(max-width:500px){.isg{grid-template-columns:1fr}}
+@media(max-width:480px){.mg{grid-template-columns:1fr 1fr}.tb{padding:10px 12px;font-size:11px}}
+@media(max-width:440px){.ig{grid-template-columns:1fr}}
+@media(max-width:400px){.tg{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="w">
+
+<header>
+  <div class="hi">
+    <div>
+      <div class="brand">HackrLife Tools</div>
+      <h1>SaaS Vitals</h1>
+      <p class="sub">Estimate payback, LTV, and acquisition efficiency with a churn-aware model. Always shows the real payback month — even beyond your planning horizon.</p>
+    </div>
+    <div class="tag">SaaS · Subscriptions · Recurring Revenue</div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <button class="tb on" onclick="tab('estimator',this)">Estimator</button>
+  <button class="tb" onclick="tab('maths',this)">The Maths</button>
+</nav>
+
+<!-- TAB 1 -->
+<div id="t-estimator" class="tp on">
+
+  <div class="is">
+    <div class="isg">
+      <div class="f">
+        <label>Currency</label>
+        <div class="iw"><select id="currency" onchange="pfx()"><option value="$">USD — $</option><option value="A$">AUD — A$</option><option value="€">EUR — €</option><option value="£">GBP — £</option><option value="₹">INR — ₹</option><option value="S$">SGD — S$</option></select></div>
+      </div>
+      <div class="f">
+        <label>Planning Horizon</label>
+        <div class="iw"><select id="horizon"><option value="12">12 months</option><option value="24">24 months</option><option value="36" selected>36 months</option><option value="48">48 months</option><option value="60">60 months</option></select></div>
+        <span class="h">Real payback is always shown even if it exceeds this window.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ig">
+    <div class="ic">
+      <div class="icg">Acquisition</div>
+      <div class="icl">Customer Acquisition Cost</div>
+      <div class="ica">CAC</div>
+      <div class="iw inv0" id="wc"><span class="ip" id="pc">$</span><input type="number" id="cac" placeholder="1200" min="0" step="10"></div>
+      <p class="ich">Fully-loaded cost to acquire one customer — ads, sales salaries, tools, commissions.</p>
+    </div>
+    <div class="ic">
+      <div class="icg">Revenue</div>
+      <div class="icl">Monthly Revenue per Customer</div>
+      <div class="ica">Base MRR</div>
+      <div class="iw" id="wa"><span class="ip" id="pa">$</span><input type="number" id="arpu" placeholder="100" min="0.01" step="1"></div>
+      <p class="ich">Average monthly recurring revenue from one new customer at the start of their lifecycle.</p>
+    </div>
+    <div class="ic">
+      <div class="icg">Revenue</div>
+      <div class="icl">Extra Monthly Revenue per Customer</div>
+      <div class="ica">Expansion MRR</div>
+      <div class="iw"><span class="ip" id="pe">$</span><input type="number" id="exp" placeholder="0" min="0" step="1" value="0"></div>
+      <p class="ich">Average additional monthly spend from upgrades or seat growth. Use $0 if none.</p>
+    </div>
+    <div class="ic">
+      <div class="icg">Revenue</div>
+      <div class="icl">Monthly Revenue Lost to Downgrades</div>
+      <div class="ica">Contraction MRR</div>
+      <div class="iw"><span class="ip" id="pk">$</span><input type="number" id="con" placeholder="0" min="0" step="1" value="0"></div>
+      <p class="ich">Average monthly revenue reduction per customer from plan downgrades. Use $0 if none.</p>
+    </div>
+    <div class="ic">
+      <div class="icg">Margin &amp; Retention</div>
+      <div class="icl">Gross Margin</div>
+      <div class="ica">%</div>
+      <div class="sr" style="margin-bottom:8px"><input type="range" id="msl" min="0" max="100" step="1" value="80" oninput="ss('m')"><div class="iw sn"><input type="number" id="m" min="0" max="100" step="1" value="80" oninput="si('m')"><span class="isuf">%</span></div></div>
+      <p class="ich">Revenue remaining after delivery costs. Typical SaaS: 70–85%.</p>
+    </div>
+    <div class="ic">
+      <div class="icg">Margin &amp; Retention</div>
+      <div class="icl">Monthly Churn Rate</div>
+      <div class="ica">%/mo</div>
+      <div class="sr" style="margin-bottom:8px"><input type="range" id="csl" min="0" max="30" step="0.1" value="5" oninput="ss('c')"><div class="iw sn"><input type="number" id="ch" min="0" max="100" step="0.1" value="5" oninput="si('c')"><span class="isuf">%</span></div></div>
+      <p class="ich">% of customers lost each month. Annual churn ÷ 12 gives a rough monthly equivalent.</p>
+    </div>
+  </div>
+
+  <p class="err" id="err"></p>
+  <button class="btn" onclick="calc()">Calculate Economics</button>
+
+  <!-- RESULTS -->
+  <div id="res" class="rh">
+
+    <div id="nb" class="nb" style="display:none">
+      <div class="nbt">⚠ This model never recovers CAC</div>
+      <p id="nbt2"></p>
+    </div>
+
+    <div class="vr">
+      <span class="vl">Heuristic Health Rating</span>
+      <span class="vb" id="vb">—</span>
+      <span class="vs">Based on weighted diagnostic signals — not a mathematical proof</span>
+      <span class="np" id="np">Rev. Retention Est. —</span>
+    </div>
+
+    <div class="mg">
+      <div class="mt ac"><div class="ml">Adj. Monthly Gross Profit</div><div class="mv" id="ogp">—</div><div class="ms">After margin, expansion &amp; downgrades</div></div>
+      <div class="mt"><div class="ml">Simple CAC Payback</div><div class="mv" id="osp">—</div><div class="ms">No churn adjustment — optimistic view</div></div>
+      <div class="mt ac"><div class="ml">Churn-Adjusted Payback</div><div class="mv" id="oap">—</div><div class="mf" id="apf" style="display:none"></div><div class="ms" id="aps">Realistic payback period</div></div>
+      <div class="mt"><div class="ml">Cohort Survival at Payback</div><div class="mv" id="osu">—</div><div class="ms">% of original cohort still active</div></div>
+      <div class="mt"><div class="ml">Estimated LTV</div><div class="mv" id="olt">—</div><div class="ms">Constant-churn estimate — directional only</div></div>
+      <div class="mt"><div class="ml">LTV:CAC Ratio</div><div class="mv" id="olc">—</div><div class="ms">Acquisition efficiency</div></div>
+      <div class="mt"><div class="ml">Revenue Retention Estimate</div><div class="mv" id="onr">—</div><div class="ms">Approximation only — not cohort-based NRR</div></div>
+    </div>
+
+    <div class="c">
+      <div style="font-family:var(--m);font-size:11px;color:var(--a);letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px">Payback Curve<span style="flex:1;height:1px;background:var(--br)"></span></div>
+      <div class="cw"><canvas id="ch2" height="270"></canvas></div>
+      <div class="cn">
+        <span><span class="dot" style="background:var(--g)"></span>Cumulative gross profit</span>
+        <span><span class="dot" style="background:var(--r)"></span>CAC line</span>
+        <span><span class="dot" style="background:var(--a);border-radius:50%;width:8px;height:8px"></span>Payback point</span>
+        <span><span class="dot" style="background:var(--br2);border:1px dashed var(--td)"></span>Planning horizon</span>
+      </div>
+    </div>
+
+    <div class="dg">
+      <div class="dgt">Diagnostic Summary</div>
+      <div id="dx"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TAB 2 -->
+<div id="t-maths" class="tp">
+
+  <div class="mi">
+    <span class="mil">How the model works</span>
+    <p>Every output is derived from your inputs. Run a calculation first — your actual worked numbers appear in green beneath each formula.</p>
+  </div>
+
+  <div class="mcg">
+    <div class="mc">
+      <div class="mcs">01</div><div class="mct">Adjusted Monthly Gross Profit</div>
+      <div class="mcfm">G = (Monthly Revenue + Extra Revenue − Downgrade Loss) × Gross Margin</div>
+      <div class="wk hidden" id="mg"></div>
+      <p class="mcb">Real gross profit per customer per month. Adds upsell revenue, subtracts downgrade losses, then applies gross margin — the actual contribution working against CAC each month.</p>
+    </div>
+    <div class="mc">
+      <div class="mcs">02</div><div class="mct">Simple CAC Payback</div>
+      <div class="mcfm">Simple Payback = CAC ÷ G</div>
+      <div class="wk hidden" id="msp"></div>
+      <p class="mcb">The no-churn baseline. Assumes every customer stays forever contributing G per month. Always faster than reality — useful only as a comparison against the churn-adjusted number.</p>
+    </div>
+    <div class="mc mcf">
+      <div class="mcs">03</div><div class="mct">Churn-Adjusted Payback</div>
+      <div class="mcfmg">
+        <div class="mcfm">Contribution(month n) = G × retention^(n−1)</div>
+        <div class="mcfm">retention = 1 − monthly_churn_rate</div>
+        <div class="mcfm">Accumulate month by month until Σ ≥ CAC</div>
+      </div>
+      <div class="wk hidden" id="map"></div>
+      <p class="mcb">Each month churn reduces the contributing base. Contributions decay geometrically. The model accumulates these shrinking values until the total crosses CAC — that is the real payback month.</p>
+      <div class="mcns">
+        <div class="mcn"><span>Always simulates 120 months</span> — if payback falls outside your planning horizon, the real month is still shown, clearly flagged.</div>
+        <div class="mcn"><span>Never recovers:</span> If churn is so high that the geometric series plateaus below CAC, no time horizon helps. Max possible cumulative = G ÷ monthly_churn. If this is less than CAC, the unit economics are fundamentally broken.</div>
+      </div>
+    </div>
+    <div class="mc">
+      <div class="mcs">04</div><div class="mct">Cohort Survival at Payback</div>
+      <div class="mcfm">Survival = retention^(payback_month − 1) × 100</div>
+      <div class="wk hidden" id="msv"></div>
+      <p class="mcb">The percentage of originally acquired customers still active when you break even. A low figure means most of the cohort churned before recovery — a warning even if payback technically occurs.</p>
+    </div>
+    <div class="mc">
+      <div class="mcs">05</div><div class="mct">Lifetime Value (LTV)</div>
+      <div class="mcfm">LTV = G ÷ monthly_churn_rate</div>
+      <div class="wk hidden" id="mlt"></div>
+      <p class="mcb">Standard geometric series formula. Assumes constant monthly churn — treat as a directional estimate only. Real churn curves are rarely flat, so LTV can overstate true lifetime economics.</p>
+      <div class="mcn"><span>Edge cases:</span> Churn = 0% → LTV is infinite. If LTV exceeds 100× CAC, verify your churn input — small errors at low rates produce very large outputs.</div>
+    </div>
+    <div class="mc">
+      <div class="mcs">06</div><div class="mct">LTV:CAC Ratio</div>
+      <div class="mcfm">LTV:CAC = LTV ÷ CAC</div>
+      <div class="wk hidden" id="mlc"></div>
+      <p class="mcb">Primary acquisition efficiency metric. Below 1.5× means lifetime value doesn't justify acquisition cost at scale. Above 5× often signals under-investment in growth.</p>
+    </div>
+    <div class="mc mcf">
+      <div class="mcs">07</div><div class="mct">Revenue Retention Estimate <span class="mctag">not true NRR</span></div>
+      <div class="mcfm">Est. = (Monthly Revenue + Extra Revenue − Downgrade Loss − Churned Revenue) ÷ Monthly Revenue × 100</div>
+      <div class="wk hidden" id="mnr"></div>
+      <p class="mcb">Above 100% suggests expansion may be outpacing churn and contraction. Below 100% suggests your existing base is contracting. A heuristic approximation from your input assumptions — not a true cohort-level NRR calculation.</p>
+      <div class="mcn"><span>Important:</span> True NRR is cohort-based and tracks beginning-period revenue carefully. Do not compare this estimate directly to reported NRR figures from SaaS benchmarks — it is directional, not precise.</div>
+    </div>
+  </div>
+
+  <div class="mfc">
+    <div class="mft">Heuristic Health Rating — Thresholds</div>
+    <p class="mfd">The rating combines three diagnostic signals using hand-weighted scores. A structured heuristic — not a mathematically derived truth. Use it as a prompt for investigation, not a final verdict.</p>
+    <div class="tg">
+      <div class="tc"><div class="tct">Churn-Adj. Payback</div>
+        <div class="tr"><span class="dg2">●</span><span>Strong</span><span>&lt;12mo</span></div>
+        <div class="tr"><span class="dg2">●</span><span>Healthy</span><span>12–18mo</span></div>
+        <div class="tr"><span class="dw">●</span><span>Caution</span><span>18–24mo</span></div>
+        <div class="tr"><span class="db">●</span><span>Weak</span><span>24–36mo</span></div>
+        <div class="tr"><span class="db">●</span><span>Unsustainable</span><span>&gt;36mo</span></div>
+      </div>
+      <div class="tc"><div class="tct">LTV:CAC Ratio</div>
+        <div class="tr"><span class="db">●</span><span>Poor</span><span>&lt;1.5×</span></div>
+        <div class="tr"><span class="dw">●</span><span>Workable</span><span>1.5–3×</span></div>
+        <div class="tr"><span class="dg2">●</span><span>Strong</span><span>3–5×</span></div>
+        <div class="tr"><span class="dg2">●</span><span>Excellent</span><span>5×+</span></div>
+      </div>
+      <div class="tc"><div class="tct">Monthly Churn</div>
+        <div class="tr"><span class="dg2">●</span><span>Strong</span><span>&lt;2%</span></div>
+        <div class="tr"><span class="dg2">●</span><span>Healthy</span><span>2–4%</span></div>
+        <div class="tr"><span class="dw">●</span><span>Risky</span><span>4–6%</span></div>
+        <div class="tr"><span class="db">●</span><span>Critical</span><span>6%+</span></div>
+      </div>
+      <div class="tc"><div class="tct">Rev. Retention Est.</div>
+        <div class="tr"><span class="dg2">●</span><span>Expansion-led</span><span>&gt;110%</span></div>
+        <div class="tr"><span class="dg2">●</span><span>Stable</span><span>100–110%</span></div>
+        <div class="tr"><span class="dw">●</span><span>Mild contraction</span><span>90–100%</span></div>
+        <div class="tr"><span class="db">●</span><span>Retention crisis</span><span>&lt;90%</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mfc">
+    <div class="mft">Assumptions &amp; Limitations</div>
+    <div class="ag">
+      <div class="ab"><div class="al">Model assumes</div><p>Monthly recurring revenue, stable unit economics, and a consistent monthly churn rate. Expansion and downgrade figures are flat monthly averages per customer.</p></div>
+      <div class="ab"><div class="al">Best suited for</div><p>SaaS, subscriptions, memberships, and recurring-revenue products where monthly unit economics are reasonably stable.</p></div>
+      <div class="ab"><div class="al">Less suited for</div><p>One-time transaction businesses, seasonal revenue models, or businesses with highly irregular expansion patterns.</p></div>
+      <div class="ab"><div class="al">LTV caveat</div><p>The standard formula assumes a constant hazard rate. Real cohorts have early churners and long-term power users. Use LTV directionally, not as a precise forecast.</p></div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span>SaaS Vitals · <a href="#">HackrLife Tools</a></span>
+  <span>All calculations run in your browser. No data is stored or transmitted.</span>
+</footer>
+</div>
+
+<script>
+const MS=120;let LR=null;
+const $=id=>document.getElementById(id);
+const S=id=>sym()+Math.round(LR?.[id]||0).toLocaleString();
+const sym=()=>$('currency').value;
+const fmtD=(v,s)=>s+v.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const fmtR=(v,s)=>s+Math.round(v).toLocaleString();
+const pC=m=>m<18?'good':m<24?'warn':'bad';
+const gc=(a,b,c)=>a>=b?'good':a>=c?'warn':'bad';
+
+function tab(id,btn){
+  document.querySelectorAll('.tp').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+  $('t-'+id).classList.add('on');btn.classList.add('on');
+}
+function pfx(){const s=sym();['c','a','e','k'].forEach(x=>{const el=$('p'+x);if(el)el.textContent=s;});}
+function ss(k){$(k).value=$(k+'sl').value;}
+function si(k){$(k+'sl').value=$(k).value;}
+function sw(id,txt){const e=$(id);if(e){e.textContent=txt;e.classList.remove('hidden');}}
+
+function calc(){
+  const cac=parseFloat($('cac').value),arpu=parseFloat($('arpu').value);
+  const exp=parseFloat($('exp').value)||0,con=parseFloat($('con').value)||0;
+  const mp=parseFloat($('m').value),cp=parseFloat($('ch').value);
+  const hz=parseInt($('horizon').value),cur=sym();
+  const err=$('err');
+  document.querySelectorAll('.iw').forEach(w=>w.classList.remove('inv'));
+  if(!cac||cac<=0||!arpu||arpu<=0){
+    err.style.display='block';
+    err.textContent='⚠ CAC and Monthly Revenue per Customer must be greater than zero.';
+    if(!cac||cac<=0)$('wc').classList.add('inv');
+    if(!arpu||arpu<=0)$('wa').classList.add('inv');
+    return;
+  }
+  err.style.display='none';
+  const gm=mp/100,mc=cp/100,ret=1-mc;
+  const G=(arpu+exp-con)*gm;
+  if(G<=0){err.textContent='⚠ Adjusted gross profit is zero or negative — check revenue and margin inputs.';err.style.display='block';return;}
+  const sp=cac/G,maxP=mc>0?G/mc:Infinity,nr=mc>0&&isFinite(maxP)&&maxP<cac;
+  let cum=0,ap=null;const cd=[];
+  for(let mo=1;mo<=MS;mo++){cum+=G*Math.pow(ret,mo-1);cd.push(+cum.toFixed(2));if(cum>=cac&&!ap)ap=mo;}
+  const sv=ap?(mc>0?Math.pow(ret,ap-1)*100:100):null;
+  let ltv=null,lf=false;
+  if(mc>0){ltv=G/mc;if(ltv>100*cac)lf=true;}
+  const lc=ltv?ltv/cac:null;
+  const nrr=((arpu+exp-con-(arpu*mc))/arpu)*100;
+  LR={cac,arpu,exp,con,mp,cp,hz,G,sp,ap,sv,ltv,lc,nrr,cd,ret,mc,lf,cur,nr,maxP};
+  render(LR);maths(LR);
+}
+
+function render(r){
+  const{cac,G,sp,ap,sv,ltv,lc,nrr,cd,lf,cur,hz,mc,cp,nr,maxP}=r;
+  $('res').classList.remove('rh');
+  const nb=$('nb');
+  if(nr){nb.style.display='block';$('nbt2').innerHTML=`At ${cp}% monthly churn, cumulative gross profit reaches a maximum of <strong>${cur}${Math.round(maxP).toLocaleString()}</strong> and never crosses your CAC of <strong>${cur}${Math.round(cac).toLocaleString()}</strong>. No amount of time fixes this — reduce churn, increase revenue, or lower CAC.`;}
+  else nb.style.display='none';
+  $('ogp').textContent=fmtD(G,cur);
+  const spE=$('osp');spE.textContent=sp.toFixed(1)+' mo';spE.className='mv '+pC(sp);
+  const apE=$('oap'),apF=$('apf'),apS=$('aps');
+  if(nr){apE.textContent='Never';apE.className='mv bad';apF.style.display='none';apS.textContent='Cannot recover CAC at this churn rate';}
+  else if(ap){
+    apE.textContent=ap+' mo';apE.className='mv '+pC(ap);
+    if(ap>hz){apF.style.display='inline-block';apF.className='mf warn';apF.textContent='⚠ Exceeds '+hz+'-month horizon';apS.textContent='Real payback is beyond your planning window';}
+    else{apF.style.display='none';apS.textContent='Realistic payback period';}
+  }
+  const svE=$('osu');
+  if(sv!==null){svE.textContent=sv.toFixed(1)+'%';svE.className='mv '+(sv>60?'good':sv>35?'warn':'bad');}
+  else{svE.textContent=nr?'—':'100%';svE.className='mv';}
+  const lE=$('olt');
+  if(mc===0){lE.textContent='∞';lE.className='mv warn';}
+  else if(lf){lE.textContent=fmtR(ltv,cur)+'*';lE.className='mv warn';}
+  else{lE.textContent=fmtR(ltv,cur);lE.className='mv '+gc(lc,3,1.5);}
+  const lcE=$('olc');
+  if(lc){lcE.textContent=lc.toFixed(1)+'×';lcE.className='mv '+gc(lc,3,1.5);}
+  else{lcE.textContent='∞';lcE.className='mv warn';}
+  const nE=$('onr');nE.textContent=nrr.toFixed(1)+'%';nE.className='mv '+(nrr>=100?'good':nrr>=90?'warn':'bad');
+  const npE=$('np');npE.textContent='Rev. Ret. Est. '+nrr.toFixed(1)+'%';npE.className='np '+(nrr>=100?'good':nrr>=90?'warn':'bad');
+  verdict(r);chart(r);diag(r);
+}
+
+function verdict(r){
+  const{ap,lc,cp,nrr,nr,hz}=r;let sc=0;
+  if(nr)sc=-10;
+  else if(ap){if(ap<12)sc+=3;else if(ap<18)sc+=2;else if(ap<24)sc+=1;else sc-=1;if(ap>hz)sc-=1;}
+  else sc-=3;
+  if(lc){if(lc>=3)sc+=2;else if(lc>=1.5)sc+=1;else sc-=1;}
+  if(cp<2)sc+=1;else if(cp>6)sc-=2;else if(cp>4)sc-=1;
+  if(r.nrr>100)sc+=1;
+  const b=$('vb');
+  const m=sc<=-3?['Unsustainable','unsustainable']:sc>=6?['Efficient','efficient']:sc>=4?['Healthy','healthy']:sc>=2?['Borderline','borderline']:sc>=0?['Weak','weak']:['Unsustainable','unsustainable'];
+  b.textContent=m[0];b.className='vb '+m[1];
+}
+
+function chart(r){
+  const{cd,cac,ap,hz,cur,nr,maxP}=r;
+  const cv=$('ch2'),dpr=window.devicePixelRatio||1,W=cv.parentElement.offsetWidth,H=270;
+  cv.width=W*dpr;cv.height=H*dpr;cv.style.width=W+'px';cv.style.height=H+'px';
+  const ctx=cv.getContext('2d');ctx.scale(dpr,dpr);
+  const p={t:28,r:20,b:44,l:72},cW=W-p.l-p.r,cH=H-p.t-p.b;
+  const cm=nr?MS:Math.max(hz,(ap||0)+8,36);
+  const dd=cd.slice(0,cm);
+  const mx=Math.max(...dd,cac,nr&&isFinite(maxP)?maxP:0)*1.12;
+  ctx.clearRect(0,0,W,H);
+  const tx=m=>p.l+(m/cm)*cW,ty=v=>p.t+cH-(v/mx)*cH;
+  // grid
+  ctx.strokeStyle='rgba(30,45,61,.9)';ctx.lineWidth=1;
+  for(let i=0;i<=4;i++){const y=p.t+(cH/4)*i;ctx.beginPath();ctx.moveTo(p.l,y);ctx.lineTo(p.l+cW,y);ctx.stroke();ctx.fillStyle='#4a6a7a';ctx.font="10px 'IBM Plex Mono',monospace";ctx.textAlign='right';ctx.fillText(cur+Math.round(mx*(1-i/4)).toLocaleString(),p.l-8,y+4);}
+  ctx.fillStyle='#4a6a7a';ctx.textAlign='center';ctx.font="10px 'IBM Plex Mono',monospace";
+  const xs=Math.ceil(cm/7);for(let m=0;m<=cm;m+=xs)ctx.fillText('M'+m,tx(m),H-10);
+  // horizon line
+  if(hz<cm){const hx=tx(hz);ctx.strokeStyle='rgba(100,140,160,.25)';ctx.lineWidth=1;ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(hx,p.t);ctx.lineTo(hx,p.t+cH);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#4a6a7a';ctx.font="9px 'IBM Plex Mono',monospace";ctx.fillText('Horizon M'+hz,hx,p.t-8);}
+  // CAC line
+  const cy=ty(cac);ctx.strokeStyle='#ff4d6a';ctx.lineWidth=1.5;ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(p.l,cy);ctx.lineTo(p.l+cW,cy);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#ff4d6a';ctx.font="10px 'IBM Plex Mono',monospace";ctx.textAlign='left';ctx.fillText('CAC '+cur+Math.round(cac).toLocaleString(),p.l+6,cy-5);
+  // plateau line
+  if(nr&&isFinite(maxP)){const my=ty(maxP);ctx.strokeStyle='rgba(240,165,0,.35)';ctx.lineWidth=1;ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(p.l,my);ctx.lineTo(p.l+cW,my);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='rgba(240,165,0,.6)';ctx.fillText('Max possible '+cur+Math.round(maxP).toLocaleString(),p.l+6,my+14);}
+  // fill
+  const gr=ctx.createLinearGradient(0,p.t,0,p.t+cH);gr.addColorStop(0,nr?'rgba(255,77,106,.12)':'rgba(0,212,170,.13)');gr.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.beginPath();ctx.moveTo(tx(0),ty(0));dd.forEach((v,i)=>ctx.lineTo(tx(i+1),ty(v)));ctx.lineTo(tx(dd.length),p.t+cH);ctx.lineTo(tx(0),p.t+cH);ctx.closePath();ctx.fillStyle=gr;ctx.fill();
+  // curve
+  ctx.beginPath();ctx.strokeStyle=nr?'#ff6b83':'#00d4aa';ctx.lineWidth=2;dd.forEach((v,i)=>{const x=tx(i+1),y=ty(v);i?ctx.lineTo(x,y):ctx.moveTo(x,y);});ctx.stroke();
+  // payback dot
+  if(ap&&!nr){const px=tx(ap),py=ty(cac);ctx.strokeStyle='rgba(240,165,0,.2)';ctx.lineWidth=1;ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(px,p.t);ctx.lineTo(px,p.t+cH);ctx.stroke();ctx.setLineDash([]);ctx.beginPath();ctx.arc(px,py,6,0,Math.PI*2);ctx.fillStyle='#f0a500';ctx.fill();ctx.fillStyle='#f0a500';ctx.font="bold 10px 'IBM Plex Mono',monospace";const lr=px>p.l+cW*.62;ctx.textAlign=lr?'right':'left';ctx.fillText('Payback M'+ap,px+(lr?-10:10),py-12);if(ap>hz){ctx.fillStyle='rgba(240,165,0,.55)';ctx.font="9px 'IBM Plex Mono',monospace";ctx.fillText('(beyond planning horizon)',px+(lr?-10:10),py+18);}}
+}
+
+function diag(r){
+  const{sp,ap,lc,nrr,sv,cp,hz,lf,nr,maxP,cac,cur}=r;const L=[];
+  if(nr){
+    L.push(`At ${cp}% monthly churn this model mathematically cannot recover CAC. Max cumulative gross profit ever possible is <strong>${cur}${Math.round(maxP).toLocaleString()}</strong> — short of CAC of <strong>${cur}${Math.round(cac).toLocaleString()}</strong> by <strong>${cur}${Math.round(cac-maxP).toLocaleString()}</strong>.`);
+    L.push(`Paths forward: reduce monthly churn, increase revenue per customer, reduce downgrade losses, or lower CAC. No time horizon change fixes this.`);
+  }else if(ap){
+    const g=ap-sp;
+    if(ap>hz)L.push(`Your planning horizon is ${hz} months, but real payback doesn't occur until <strong>month ${ap}</strong>. Churn is adding <strong>${g.toFixed(0)} months</strong> beyond what simple payback suggests.`);
+    else if(g>6)L.push(`Churn is adding <strong>${g.toFixed(0)} months</strong> to your real payback. Improving monthly retention by even 1–2 percentage points will have compounding impact on economics.`);
+    else if(g>2)L.push(`Churn-adjusted payback is ${g.toFixed(0)} months longer than simple payback. Targeted retention improvements would accelerate your true recovery timeline.`);
+    else L.push(`Simple and churn-adjusted payback are very close — churn is not materially distorting your recovery timeline under current assumptions.`);
+  }
+  if(sv!==null&&sv<50&&ap&&!nr)L.push(`Only <strong>${sv.toFixed(0)}%</strong> of your original cohort remains active at payback month ${ap}. You're recovering CAC on a fraction of the customers you started with — early retention may be more valuable than additional acquisition spend.`);
+  if(!nr){
+    if(nrr>=110)L.push(`Revenue retention estimate of ${nrr.toFixed(1)}% suggests expansion may be outpacing churn — a positive signal, though this is an approximation, not a precise NRR measurement.`);
+    else if(nrr>=100)L.push(`Revenue retention estimate is above 100%, suggesting expansion is roughly holding its own against churn and downgrades. Treat as directional.`);
+    else if(nrr>=90)L.push(`Revenue retention estimate of ${nrr.toFixed(1)}% suggests mild contraction. Growing upsell revenue or reducing downgrades would improve long-term economics.`);
+    else L.push(`Revenue retention estimate of ${nrr.toFixed(1)}% suggests your existing base may be shrinking materially. Prioritise retention before increasing acquisition spend.`);
+    if(lc>=5)L.push(`LTV:CAC of ${lc.toFixed(1)}× is very high — consider whether you're under-investing in growth.`);
+    else if(lc!==null&&lc<1.5)L.push(`LTV:CAC of ${lc.toFixed(1)}× is too low for efficient scaling. Reduce CAC or extend average customer lifetime before increasing acquisition spend.`);
+    if(lf)L.push(`LTV appears very high relative to CAC — double-check your churn rate. Small errors at low churn values produce very large LTV outputs.`);
+  }
+  $('dx').innerHTML=L.map(l=>`<p>${l}</p>`).join('');
+}
+
+function maths(r){
+  const{cac,arpu,exp,con,G,mp,cp,mc,sp,ap,sv,ltv,lc,nrr,ret,cur,nr,hz}=r,s=cur;
+  sw('mg',`→ (${s}${arpu} + ${s}${exp} − ${s}${con}) × ${mp}% = ${s}${G.toFixed(2)}`);
+  sw('msp',`→ ${s}${cac} ÷ ${s}${G.toFixed(2)} = ${sp.toFixed(1)} months`);
+  sw('map',nr?`→ Model never recovers CAC at ${cp}% monthly churn`:ap?`→ Payback at month ${ap} (retention = ${(ret*100).toFixed(1)}%/month)${ap>hz?' — beyond '+hz+'-month horizon':''}`:(`→ Not recovered within ${MS}-month simulation`));
+  if(sv!==null)sw('msv',`→ ${(ret*100).toFixed(1)}%^${(ap||0)-1} = ${sv.toFixed(1)}% of cohort still active at payback`);
+  sw('mlt',mc>0?`→ ${s}${G.toFixed(2)} ÷ ${cp}% = ${s}${ltv?Math.round(ltv).toLocaleString():'—'}`:`→ Churn = 0%, LTV = ∞`);
+  if(lc)sw('mlc',`→ ${s}${ltv?Math.round(ltv).toLocaleString():'∞'} ÷ ${s}${cac} = ${lc.toFixed(2)}×`);
+  sw('mnr',`→ (${s}${arpu} + ${s}${exp} − ${s}${con} − ${s}${(arpu*mc).toFixed(2)}) ÷ ${s}${arpu} × 100 = ${nrr.toFixed(1)}%`);
+}
+
+window.addEventListener('resize',()=>{if(LR)chart(LR);});
+</script>
+</body>
+</html>
