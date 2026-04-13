@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>K-Factor Virality Tool — HackrTools</title>
+<meta name="description" content="Plan your viral growth target and diagnose real post performance. The K-Factor tool for founders and growth operators."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300;1,9..144,600&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}:root{--bg:#08090a; --sf:#0e0f11; --card:#131416; --card2:#181a1c;--br:rgba(255,255,255,.07); --br2:rgba(255,255,255,.13);--tx:#ffffff; --tx2:#ffffff; --mu:#a0a8b0; --mu2:#c4cad4;--ac:#f0a500; --ac2:#ffe082;--blue:#5c9ce0; --red:#e05c5c; --green:#4ade80; --purple:#a78bfa;--mono:'IBM Plex Mono',monospace; --serif:'Fraunces',Georgia,serif;}*{-webkit-font-smoothing:antialiased}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--tx);font-family:var(--mono);font-size:15px;line-height:1.75;min-height:100vh;overflow-x:hidden}body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.028'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}nav{position:sticky;top:0;z-index:100;background:rgba(8,9,10,.96);backdrop-filter:blur(24px);border-bottom:1px solid var(--br)}.nav-inner{max-width:1160px;margin:0 auto;display:flex;align-items:stretch;padding:0 2rem;gap:0}.back{font-size:.87rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);text-decoration:none;transition:color .15s;padding:1rem 1.1rem 1rem 0;border-right:1px solid var(--br);margin-right:.6rem;display:flex;align-items:center;white-space:nowrap}.back:hover{color:var(--ac)}.back::before{content:'← '}.nav-brand{font-family:var(--serif);font-style:italic;font-size:1rem;font-weight:300;color:var(--mu2);align-self:center;padding-right:1.5rem;border-right:1px solid var(--br);margin-right:.6rem}.nav-tabs{display:flex;align-items:stretch;flex:1}.ntab{font-family:var(--mono);font-size:.87rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);background:none;border:none;border-bottom:2px solid transparent;padding:.9rem 1.3rem .8rem;cursor:pointer;transition:all .15s;position:relative;top:1px;white-space:nowrap;display:flex;align-items:center;gap:.5rem}.ntab:hover{color:var(--tx2)}.ntab.on{color:var(--ac);border-bottom-color:var(--ac)}.ntab-pip{width:6px;height:6px;border-radius:50%;flex-shrink:0}.ntab[data-page="plan"] .ntab-pip{background:var(--purple)}.ntab[data-page="diagnose"] .ntab-pip{background:var(--green)}.ntab[data-page="about"] .ntab-pip{background:var(--blue)}.ntab[data-page="contact"] .ntab-pip{background:var(--mu)}.page{display:none}.page.on{display:block}.page-wrap{max-width:1160px;margin:0 auto}.page-header{padding:2.5rem 2rem 2rem;border-bottom:1px solid var(--br)}.eyebrow{font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ac);margin-bottom:.75rem;display:flex;align-items:center;gap:.55rem}.eyebrow::before{content:'';display:block;width:16px;height:1px;background:var(--ac)}.nav-brand strong,.page-h1 strong,.about-h1 strong,.contact-h1 strong{font-weight:600;font-style:normal;color:var(--ac)}.page-h1{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;font-style:italic;letter-spacing:-.025em;color:var(--tx);line-height:1.08;margin-bottom:.55rem}.page-sub{font-size:1rem;color:var(--mu2);max-width:600px;line-height:1.8}.tool-body{display:grid;grid-template-columns:380px 1fr;border:1px solid var(--br);border-top:none}@media(max-width:860px){.tool-body{grid-template-columns:1fr}}.left-panel{background:var(--sf);border-right:1px solid var(--br);display:flex;flex-direction:column}.lp-section{padding:1.25rem 1.4rem;border-bottom:1px solid var(--br)}.lp-section:last-of-type{border-bottom:none;flex:1}.lp-label{font-size:.85rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ac);margin-bottom:.9rem;display:flex;align-items:center;gap:.45rem}.lp-label::before{content:'▸';font-size:1rem;opacity:.7}.field-stack{display:flex;flex-direction:column;gap:.8rem}.field{display:flex;flex-direction:column;gap:.22rem}.field-row{display:flex;align-items:center;justify-content:space-between;gap:.5rem}.field label{font-size:1rem;color:var(--tx2);line-height:1.35}.field label small{display:block;font-size:.85rem;color:var(--mu);margin-top:.04rem}.field-input-wrap{display:flex;align-items:center;gap:.38rem;flex-shrink:0}.field input[type=number]{background:var(--card2);border:1px solid var(--br2);color:var(--tx);font-family:var(--mono);font-size:1rem;padding:.4rem .55rem;width:88px;text-align:right;outline:none;transition:border-color .2s;-moz-appearance:textfield;appearance:textfield}.field input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none}.field input[type=number]:focus{border-color:var(--ac)}.field-unit{font-size:.85rem;color:var(--mu);min-width:36px}.field-note{font-size:.85rem;color:var(--mu);line-height:1.5;margin-top:.15rem}.slider-field{display:flex;flex-direction:column;gap:.35rem}.slider-field label{font-size:1rem;color:var(--tx2)}.slider-row{display:flex;align-items:center;gap:.65rem}.slider-row input[type=range]{flex:1;-webkit-appearance:none;appearance:none;height:2px;background:var(--br2);outline:none;cursor:pointer}.slider-row input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;background:var(--ac);border-radius:50%;cursor:pointer;transition:transform .15s}.slider-row input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}.slider-row input[type=range]::-moz-range-thumb{width:13px;height:13px;background:var(--ac);border:none;border-radius:50%;cursor:pointer}.slider-val{font-size:1rem;font-weight:500;color:var(--ac);min-width:38px;text-align:right}.lp-cta{padding:1.1rem 1.4rem;border-top:1px solid var(--br);background:var(--card)}.btn-run{width:100%;background:var(--ac);color:#08090a;font-family:var(--mono);font-size:1rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;border:none;padding:.8rem;cursor:pointer;transition:background .15s}.btn-run:hover{background:var(--ac2)}.btn-secondary{background:none;border:1px solid var(--br2);color:var(--mu2);font-family:var(--mono);font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;padding:.55rem .9rem;cursor:pointer;transition:all .15s;margin-top:.5rem;width:100%}.btn-secondary:hover{color:var(--tx);border-color:var(--mu)}.right-panel{background:var(--card);overflow-y:auto;max-height:calc(100vh - 140px)}@media(max-width:860px){.right-panel{max-height:none}}.rp-inner{padding:1.5rem}.idle{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:320px;gap:.85rem;text-align:center;padding:2rem}.idle-glyph{font-size:2.5rem;opacity:.12;font-family:var(--serif);font-style:italic;font-weight:600;color:var(--ac)}.idle-title{font-family:var(--serif);font-style:italic;font-size:1rem;font-weight:300;color:var(--mu2)}.idle-sub{font-size:.95rem;color:var(--mu);max-width:220px;line-height:1.8}.out-section{font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mu);border-bottom:1px solid var(--br);padding-bottom:.35rem;margin-bottom:.9rem;margin-top:1.4rem}.out-section:first-child{margin-top:0}.num-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--br);margin-bottom:1.25rem}.num-cell{background:var(--sf);padding:1rem 1.1rem}.num-label{font-size:1rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu2);margin-bottom:.3rem}.num-value{font-family:var(--serif);font-size:1.8rem;font-weight:600;line-height:1;letter-spacing:-.03em} .num-value.purple{color:var(--purple)}.num-sub{font-size:.82rem;color:var(--mu2);margin-top:.3rem;line-height:1.4}.verdict{padding:1rem 1.1rem 1rem 1.35rem;margin-bottom:.85rem;position:relative;border:1px solid var(--br2)}.verdict::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}.verdict.vg::before{background:var(--green)} .verdict.vm::before{background:var(--ac)} .verdict.vb::before{background:var(--red)} .verdict.vp::before{background:var(--purple)}.verdict-label{font-size:1rem;letter-spacing:.11em;text-transform:uppercase;color:var(--mu2);margin-bottom:.28rem}.verdict-text{font-size:.95rem;color:var(--tx);line-height:1.7}.proj-table{width:100%;border-collapse:collapse;font-size:.95rem;margin-bottom:.5rem}.proj-table th{font-size:1rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);text-align:left;padding:.42rem .65rem;border-bottom:1px solid var(--br)}.proj-table td{padding:.4rem .65rem;border-bottom:1px solid var(--br);color:var(--tx2)}.proj-table tr:last-child td{border-bottom:none}.proj-table td.target{color:var(--purple)}.proj-table td.gap-good{color:var(--green)} .proj-table td.gap-bad{color:var(--red)}.note{font-size:.85rem;color:var(--mu);font-style:italic;line-height:1.55;margin-top:.45rem}.gap-block{background:var(--sf);border:1px solid var(--br);margin-bottom:1.1rem}.gap-row{display:flex;align-items:center;gap:.75rem;padding:.6rem .9rem;border-bottom:1px solid var(--br)}.gap-row:last-child{border-bottom:none}.gap-name{font-size:1rem;color:var(--tx2);min-width:120px;flex-shrink:0}.gap-track{flex:1;height:5px;background:var(--br2);position:relative;overflow:hidden}.gap-fill{position:absolute;left:0;top:0;height:100%;transition:width .4s} .gap-nums{font-size:1rem;min-width:90px;text-align:right;flex-shrink:0}.gap-nums.good{color:var(--green)} .gap-nums.warn{color:var(--ac)} .gap-nums.bad{color:var(--red)}.rec-list{display:flex;flex-direction:column;gap:.65rem;margin-bottom:1.1rem}.rec{background:var(--sf);border:1px solid var(--br);border-left:3px solid;padding:.95rem 1.05rem}.rec.r1{border-left-color:var(--red)} .rec.r2{border-left-color:var(--ac)} .rec.r3{border-left-color:var(--blue)}.rec-rank{font-size:1rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu2);margin-bottom:.22rem}.rec-title{font-size:.95rem;color:var(--tx);font-weight:500;margin-bottom:.28rem}.rec-body{font-size:1rem;color:var(--mu2);line-height:1.65}.rec-impact{font-size:.87rem;color:var(--ac);margin-top:.3rem}.memo{border:1px solid var(--br);margin-top:1.1rem}.memo-head{display:flex;align-items:center;justify-content:space-between;padding:.6rem .9rem;border-bottom:1px solid var(--br)}.memo-title{font-size:1rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}.btn-copy{background:none;border:1px solid var(--br2);color:var(--mu2);font-family:var(--mono);font-size:1rem;letter-spacing:.08em;text-transform:uppercase;padding:.22rem .65rem;cursor:pointer;transition:all .15s}.btn-copy:hover{border-color:var(--ac);color:var(--ac)}.memo-body{padding:.9rem;font-size:1rem;color:var(--tx2);line-height:1.9;white-space:pre-wrap}.channel-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:.75rem}.ch{background:var(--card2);border:1px solid var(--br2);color:var(--mu2);font-family:var(--mono);font-size:1rem;padding:.5rem .7rem;cursor:pointer;transition:all .15s;text-align:left;display:flex;align-items:center;gap:.45rem}.ch:hover{border-color:var(--mu2);color:var(--tx)}.ch.on{background:rgba(240,165,0,.08);border-color:var(--ac);color:var(--ac)}.ch-desc{font-size:.85rem;color:var(--mu2);line-height:1.55;padding:.6rem .75rem;border:1px solid var(--br);background:var(--card);margin-top:.1rem}.ch-desc strong{color:var(--tx2)}.lifecycle{margin-top:.6rem}.lc-header{display:flex;justify-content:space-between;font-size:.85rem;color:var(--mu);margin-bottom:.35rem}.lc-track{height:5px;background:var(--br2);position:relative;overflow:hidden}.lc-fill{height:100%;background:var(--ac);transition:width .3s;position:relative}.lc-marker{position:absolute;right:-1px;top:-3px;width:2px;height:11px;background:var(--ac)}.lc-status{display:flex;justify-content:space-between;font-size:.85rem;color:var(--mu2);margin-top:.3rem}.about-wrap{max-width:780px;margin:0 auto;padding:3rem 2rem 6rem}.about-hero{margin-bottom:3rem}.about-h1{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;font-style:italic;letter-spacing:-.03em;color:var(--tx);line-height:1.08;margin-bottom:.8rem}.about-lead{font-size:1rem;color:var(--tx2);line-height:1.95;max-width:640px}.about-sec{margin-bottom:2.75rem;padding-bottom:2.75rem;border-bottom:1px solid var(--br)}.about-sec:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}.as-eyebrow{font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);margin-bottom:.65rem;display:flex;align-items:center;gap:.45rem}.as-eyebrow::before{content:'';display:block;width:14px;height:1px;background:var(--ac)}.as-h2{font-family:var(--serif);font-size:1.45rem;font-weight:300;font-style:italic;color:var(--tx);margin-bottom:.85rem;letter-spacing:-.02em}.as-body{font-size:1rem;color:var(--tx2);line-height:1.95}.as-body p{margin-bottom:.8rem} .as-body p:last-child{margin-bottom:0}.as-body strong{color:var(--tx);font-weight:500}.fbox{background:var(--sf);border:1px solid var(--br2);padding:.85rem 1.1rem;font-size:1rem;color:var(--ac);letter-spacing:.03em;overflow-x:auto;white-space:nowrap;margin:.85rem 0}.fvars{display:grid;grid-template-columns:1fr 1fr;gap:.35rem .75rem;margin-bottom:.75rem}@media(max-width:540px){.fvars{grid-template-columns:1fr}}.fv{display:grid;grid-template-columns:80px 1fr;font-size:1rem;gap:.3rem} .fv-v{color:var(--mu2);line-height:1.45}.k-scale{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--br);margin:1.1rem 0}.ks{background:var(--card);padding:1rem 1.1rem}.ks-num{font-family:var(--serif);font-size:1.35rem;font-weight:600;letter-spacing:-.03em;margin-bottom:.25rem} .ks-lbl{font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mu2);margin-bottom:.35rem}.ks-desc{font-size:1rem;color:var(--mu2);line-height:1.6}.gl{display:flex;flex-direction:column;gap:.55rem;margin:1rem 0}.gl-row{display:grid;grid-template-columns:110px 1fr;gap:.45rem;font-size:1rem} .gl-def{color:var(--mu2);line-height:1.5}.contact-wrap{max-width:600px;margin:0 auto;padding:3rem 2rem 6rem}.contact-h1{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:300;font-style:italic;letter-spacing:-.025em;color:var(--tx);line-height:1.1;margin-bottom:.55rem}.contact-lead{font-size:1rem;color:var(--mu2);line-height:1.85;margin-bottom:1.75rem}.contact-links{display:flex;flex-direction:column;gap:2px}.cl{background:var(--card);border:1px solid var(--br);padding:1.1rem 1.35rem;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:.9rem;text-decoration:none;transition:background .15s}.cl:hover{background:var(--sf)}.cl:hover .cl-arr{opacity:1;transform:translate(2px,-2px)}.cl-icon{font-size:1rem}.cl-lbl{font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);margin-bottom:.18rem}.cl-val{font-size:.95rem;color:var(--tx)}.cl-arr{color:var(--ac);opacity:0;transition:all .2s;font-size:1rem}.built-by{margin-top:2rem;padding:1.25rem 1.4rem;border:1px solid var(--br);background:var(--sf)}.by-label{font-size:1rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mu);margin-bottom:.5rem}.by-name{font-family:var(--serif);font-style:italic;font-size:1rem;font-weight:300;color:var(--tx);margin-bottom:.35rem}.by-body{font-size:1rem;color:var(--mu2);line-height:1.8}footer{border-top:1px solid var(--br);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;max-width:1160px;margin:0 auto}.fl{font-family:var(--serif);font-size:.95rem;font-style:italic;color:var(--mu)}.fr{font-size:.82rem;color:var(--mu);letter-spacing:.05em}@media(max-width:640px){.nav-inner{padding:0 1rem}.ntab{padding:.85rem .75rem .75rem;font-size:.82rem}.page-header{padding:2rem 1rem 1.5rem}.rp-inner{padding:1rem}.num-grid{grid-template-columns:1fr}.about-wrap,.contact-wrap{padding-left:1rem;padding-right:1rem}.nav-brand{display:none}}.good{color:var(--green)}.warn{color:var(--ac)}.bad{color:var(--red)}.gap-fill.good{background:var(--green)}.gap-fill.warn{background:var(--ac)}.gap-fill.bad{background:var(--red)}.proj-table td.hi,.lc-status .pct,.fv-k,.gl-term{color:var(--ac);font-weight:500}</style>>
+</head>
+<body><nav><div class="nav-inner"><a href="../../" class="back">HackrTools</a><span class="nav-brand">K-Factor <strong>Virality</strong> Tool</span><div class="nav-tabs" id="nav-tabs"><button class="ntab on" data-page="plan"><span class="ntab-pip"></span>Plan</button><button class="ntab" data-page="diagnose"><span class="ntab-pip"></span>Diagnose</button><button class="ntab" data-page="about"><span class="ntab-pip"></span>About K-Factor</button><button class="ntab" data-page="contact"><span class="ntab-pip"></span>Contact</button></div></div>
+</nav><div class="page on" id="page-plan">
+<div class="page-wrap"><div class="page-header"><div class="eyebrow">Before You Post · Target-First Planning</div><h1 class="page-h1"><strong>Plan</strong> your viral growth</h1><p class="page-sub">Set the K-Factor you want to achieve. The tool works backwards and tells you exactly what share rate, CTR, conversion, and invite rate you need to hit it — and shows the gap between your current estimates and that target.</p></div><div class="tool-body"><div class="left-panel"><div class="lp-section"><div class="lp-label">Your K Target</div><div class="field-stack"><div class="field"><div class="field-row"><label>Target K-Factor<small>The viral coefficient you want to achieve</small></label><div class="field-input-wrap"><input type="number" id="p-target-k" value="0.4" min="0.01" max="3" step="0.05"/></div></div><div class="field-note">K = 1.0 is self-sustaining. Realistic targets: 0.2–0.5 for B2B SaaS, 0.4–0.8 for consumer apps. Start with what is achievable in your category.</div></div><div class="field"><div class="field-row"><label>Seed Users (N₀)<small>Starting users who will trigger the loop</small></label><div class="field-input-wrap"><input type="number" id="p-seed" value="100" min="1" step="1"/><span class="field-unit">users</span></div></div></div><div class="field"><div class="field-row"><label>Viral Cycle Time<small>Days for one share-to-signup loop to complete</small></label><div class="field-input-wrap"><input type="number" id="p-vct" value="7" min="1" max="90" step="1"/><span class="field-unit">days</span></div></div></div></div></div><div class="lp-section"><div class="lp-label">Your Current Estimates — Social Feed</div><div class="field-stack"><div class="field"><div class="field-row"><label>Share Rate<small>% of users who will post publicly</small></label><div class="field-input-wrap"><input type="number" id="p-share" value="10" min="0" max="100" step="0.5"/><span class="field-unit">%</span></div></div></div><div class="field"><div class="field-row"><label>Avg. Impressions per Post<small>Expected organic reach per share</small></label><div class="field-input-wrap"><input type="number" id="p-imp" value="300" min="0" step="10"/><span class="field-unit">views</span></div></div></div><div class="field"><div class="field-row"><label>Click-Through Rate<small>% of impressions who click your link</small></label><div class="field-input-wrap"><input type="number" id="p-ctr" value="2.0" min="0" max="100" step="0.1"/><span class="field-unit">%</span></div></div></div><div class="field"><div class="field-row"><label>Landing Conversion<small>% of clicks who sign up</small></label><div class="field-input-wrap"><input type="number" id="p-conv" value="10" min="0" max="100" step="0.5"/><span class="field-unit">%</span></div></div></div></div></div><div class="lp-section"><div class="lp-label">Your Current Estimates — Direct Invites</div><div class="field-stack"><div class="field"><div class="field-row"><label>Invites per User<small>Avg. direct messages or referral links sent</small></label><div class="field-input-wrap"><input type="number" id="p-invites" value="1.5" min="0" step="0.1"/><span class="field-unit">msgs</span></div></div></div><div class="field"><div class="field-row"><label>Invite Conversion<small>% of recipients who sign up</small></label><div class="field-input-wrap"><input type="number" id="p-iconv" value="20" min="0" max="100" step="0.5"/><span class="field-unit">%</span></div></div></div></div></div><div class="lp-section"><div class="lp-label">Strategy Multipliers</div><div class="field-stack"><div class="slider-field"><label>Network Density <span style="color:var(--mu);font-size:.58rem">— how targeted is your audience?</span></label><div class="slider-row"><input type="range" id="p-density" min="0.5" max="2.0" step="0.05" value="1.0" oninput="document.getElementById('p-dv').textContent=parseFloat(this.value).toFixed(2)+'×'"/><span class="slider-val" id="p-dv">1.00×</span></div></div><div class="slider-field"><label>Topic Resonance <span style="color:var(--mu);font-size:.58rem">— how urgent is your content?</span></label><div class="slider-row"><input type="range" id="p-resonance" min="0.5" max="2.0" step="0.05" value="1.0" oninput="document.getElementById('p-rv').textContent=parseFloat(this.value).toFixed(2)+'×'"/><span class="slider-val" id="p-rv">1.00×</span></div></div></div></div><div class="lp-cta"><button class="btn-run" onclick="runPlan()">▶  Show Me the Gap</button><button class="btn-secondary" onclick="resetPlan()">Reset to defaults</button></div></div><div class="right-panel"><div class="rp-inner"><div class="idle" id="plan-idle"><div class="idle-glyph">K</div><div class="idle-title">Set your K target</div><div class="idle-sub">Enter the K-Factor you are aiming for and your current input estimates. The tool will show you the gap and what you need to change.</div></div><div id="plan-results" style="display:none"></div></div></div></div>
+</div>
+</div><div class="page" id="page-diagnose">
+<div class="page-wrap"><div class="page-header"><div class="eyebrow">After You Post · Real Data · Forward Projection</div><h1 class="page-h1"><strong>Diagnose</strong> a live post</h1><p class="page-sub">Enter what has actually happened on a post you already published — impressions, clicks, signups so far. The tool back-calculates your real K, projects where you will land by end of the channel lifecycle, and tells you what to fix on the next post.</p></div><div class="tool-body"><div class="left-panel"><div class="lp-section"><div class="lp-label">Channel</div><div class="channel-grid"><button class="ch on" data-ch="linkedin" onclick="selCh(this)">in LinkedIn</button><button class="ch" data-ch="twitter" onclick="selCh(this)">𝕏 X / Twitter</button><button class="ch" data-ch="instagram" onclick="selCh(this)">📸 Instagram</button><button class="ch" data-ch="email" onclick="selCh(this)">✉️ Email</button><button class="ch" data-ch="web" onclick="selCh(this)">🌐 Website / SEO</button><button class="ch" data-ch="downloads" onclick="selCh(this)">⬇️ App Downloads</button><button class="ch" data-ch="referral" onclick="selCh(this)">🔗 Referral Loop</button><button class="ch" data-ch="paid" onclick="selCh(this)">💰 Paid Ads</button></div><div class="ch-desc" id="ch-desc"></div></div><div class="lp-section"><div class="lp-label">Time Since Published</div><div class="field-stack"><div class="field"><div class="field-row"><label>Hours since you posted<small>Any number — 1.5, 6, 24, 48, 72...</small></label><div class="field-input-wrap"><input type="number" id="d-hours" value="6" min="0.5" step="0.5" oninput="updateLC()"/><span class="field-unit">hours</span></div></div></div><div class="lifecycle" id="lc-widget"><div class="lc-header"><span>Published</span><span id="lc-peak-lbl">Peak</span><span id="lc-end-lbl">Lifecycle end</span></div><div class="lc-track"><div class="lc-fill" id="lc-fill"><div class="lc-marker"></div></div></div><div class="lc-status"><span class="pct" id="lc-pct">—</span><span id="lc-rem">— remaining</span></div></div></div></div><div class="lp-section"><div class="lp-label">What Actually Happened (So Far)</div><div class="field-stack"><div class="field"><div class="field-row"><label>Impressions / Reach<small>Total views or sends recorded so far</small></label><div class="field-input-wrap"><input type="number" id="d-imp" value="800" min="0" step="1"/><span class="field-unit">views</span></div></div></div><div class="field"><div class="field-row"><label>Clicks / Link Taps<small>Clicks on your link or CTA so far</small></label><div class="field-input-wrap"><input type="number" id="d-clicks" value="22" min="0" step="1"/><span class="field-unit">clicks</span></div></div></div><div class="field"><div class="field-row"><label>Signups / Conversions<small>New users or leads from this post so far</small></label><div class="field-input-wrap"><input type="number" id="d-conv" value="4" min="0" step="1"/><span class="field-unit">users</span></div></div></div><div class="field"><div class="field-row"><label>Shares / Reposts / Forwards<small>How many people re-shared this so far</small></label><div class="field-input-wrap"><input type="number" id="d-shares" value="6" min="0" step="1"/><span class="field-unit">shares</span></div></div></div><div class="field"><div class="field-row"><label>Seed Users<small>Existing users who were exposed to this post</small></label><div class="field-input-wrap"><input type="number" id="d-seed" value="200" min="1" step="1"/><span class="field-unit">users</span></div></div></div></div></div><div class="lp-section"><div class="lp-label">Your Benchmarks (to measure against)</div><div class="field-stack"><div class="field"><div class="field-row"><label>Target CTR<small>What you were aiming for</small></label><div class="field-input-wrap"><input type="number" id="d-tctr" value="2.5" min="0" max="100" step="0.1"/><span class="field-unit">%</span></div></div></div><div class="field"><div class="field-row"><label>Target Conversion<small>What you were aiming for</small></label><div class="field-input-wrap"><input type="number" id="d-tconv" value="12" min="0" max="100" step="0.1"/><span class="field-unit">%</span></div></div></div></div></div><div class="lp-cta"><button class="btn-run" onclick="runDiag()">▶  Project Forward + Diagnose</button><button class="btn-secondary" onclick="resetDiag()">Reset</button></div></div><div class="right-panel"><div class="rp-inner"><div class="idle" id="diag-idle"><div class="idle-glyph">↗</div><div class="idle-title">Enter your real post data</div><div class="idle-sub">Select the channel, enter what you have observed so far, and click Diagnose to see your actual K and forward projection.</div></div><div id="diag-results" style="display:none"></div></div></div></div>
+</div>
+</div><div class="page" id="page-about">
+<div class="about-wrap"><div class="about-hero"><div class="eyebrow">Theory · Formulas · Benchmarks</div><h1 class="about-h1">What is the <strong>K-Factor</strong> and why does it matter?</h1><p class="about-lead">The K-Factor tells you whether your product is growing on its own energy or being kept alive by paid spend. It is the single most important number in viral growth — and one of the most misunderstood. This page explains where it comes from, what the formula means, and how to read the numbers in practice.</p></div><div class="about-sec"><div class="as-eyebrow">Origin</div><h2 class="as-h2">Where K-Factor comes from</h2><div class="as-body"><p>K was borrowed from epidemiology — specifically R₀, the reproduction number that describes how many new people each infected person infects. Above 1.0 the disease spreads exponentially. Below 1.0 it dies out.</p><p>Early viral game developers noticed user growth followed the same logic. Popularised by <strong>Andrew Chen</strong> (a16z) and <strong>David Skok</strong> (Matrix Partners), it is now standard vocabulary in every growth conversation.</p></div></div><div class="about-sec"><div class="as-eyebrow">The Formula</div><h2 class="as-h2">How this tool calculates K</h2><div class="as-body"><p>Two loops combined, scaled by two qualitative multipliers:</p></div><div class="fbox">K_social = s × r × ctr × c</div><div class="fvars"><div class="fv"><span class="fv-k">s</span><span class="fv-v">Share Rate — fraction who post publicly</span></div><div class="fv"><span class="fv-k">r</span><span class="fv-v">Reach — avg. impressions per post</span></div><div class="fv"><span class="fv-k">ctr</span><span class="fv-v">Click-Through Rate — fraction who click</span></div><div class="fv"><span class="fv-k">c</span><span class="fv-v">Conversion — fraction of clicks who sign up</span></div></div><div class="fbox">K_network = i × c_inv</div><div class="fvars"><div class="fv"><span class="fv-k">i</span><span class="fv-v">Invites per user — direct messages sent</span></div><div class="fv"><span class="fv-k">c_inv</span><span class="fv-v">Invite conversion — fraction who sign up</span></div></div><div class="fbox">K_total = (K_social + K_network) × (Density × Resonance)</div><div class="fbox" style="color:var(--tx2)">Growth(T) = N₀ × K_total ^ (T ÷ VCT)</div><div class="as-body"><p style="font-size:.7rem;color:var(--mu);font-style:italic">Assumes constant loop rates and no market saturation. Treat all outputs as directional estimates.</p></div></div><div class="about-sec"><div class="as-eyebrow">Interpretation</div><h2 class="as-h2">What does your K score mean?</h2><div class="k-scale"><div class="ks"><div class="ks-num bad">K &lt; 0.5</div><div class="ks-lbl">Critically Low</div><div class="ks-desc">Organic acquisition is negligible. Every user is the result of paid effort. Fix the loop before scaling spend.</div></div><div class="ks"><div class="ks-num warn">0.5 – 0.99</div><div class="ks-lbl">Partial Assist</div><div class="ks-desc">The loop supplements paid but cannot sustain growth alone. Still meaningful — at K=0.8, every 100 paid generates 400 organic over time.</div></div><div class="ks"><div class="ks-num good">K ≥ 1.0</div><div class="ks-lbl">Self-Sustaining</div><div class="ks-desc">Growth compounds without additional paid spend. In practice K decays as audience saturates — rarely holds above 1.2 at scale.</div></div></div><div class="as-body"><p><strong>The organic multiplier:</strong> Organic users per 100 paid = K ÷ (1 − K) × 100. At K=0.5 that is 100 organic. At K=0.8 it is 400. Even a non-self-sustaining K dramatically improves CAC efficiency.</p></div></div><div class="about-sec"><div class="as-eyebrow">Plan vs Diagnose</div><h2 class="as-h2">How the two tabs work together</h2><div class="as-body"><p><strong>Plan (before you post)</strong> — you set the K you want and enter your best estimates for share rate, reach, CTR, conversion, and invites. The tool works backwards: given your K target, here is what each metric needs to be. It shows the gap between your estimates and the target so you know which lever to pull before you write a single word.</p><p><strong>Diagnose (after you post)</strong> — you enter what actually happened: real impressions, real clicks, real signups, real shares. The tool back-calculates your actual K from this post, uses the channel lifecycle window to extrapolate what you will land at by end of distribution, and tells you the single biggest thing to change on the next post. Over time this becomes a feedback loop — Plan, Post, Diagnose, improve, repeat.</p></div></div><div class="about-sec"><div class="as-eyebrow">Glossary</div><h2 class="as-h2">All terms defined</h2><div class="gl"><div class="gl-row"><span class="gl-term">K-Factor</span><span class="gl-def">Average new users recruited per existing user across all loops in one viral cycle</span></div><div class="gl-row"><span class="gl-term">K_social</span><span class="gl-def">K contribution from the social feed broadcast loop (public sharing)</span></div><div class="gl-row"><span class="gl-term">K_network</span><span class="gl-def">K contribution from the direct invite loop (email, DM, referral links)</span></div><div class="gl-row"><span class="gl-term">VCT</span><span class="gl-def">Viral Cycle Time — days from share or invite to new user activation</span></div><div class="gl-row"><span class="gl-term">Share Rate</span><span class="gl-def">Fraction of active users who create a public post featuring the product</span></div><div class="gl-row"><span class="gl-term">CTR</span><span class="gl-def">Click-Through Rate — fraction of impressions who click through to your page</span></div><div class="gl-row"><span class="gl-term">Conversion</span><span class="gl-def">Fraction of page visitors who complete signup or activation</span></div><div class="gl-row"><span class="gl-term">Density</span><span class="gl-def">Multiplier for how well your sharing audience overlaps with your target market</span></div><div class="gl-row"><span class="gl-term">Resonance</span><span class="gl-def">Multiplier for content urgency and emotional pull</span></div><div class="gl-row"><span class="gl-term">Leaky Bucket</span><span class="gl-def">K &lt; 1.0 state — paid spend required to maintain growth momentum</span></div><div class="gl-row"><span class="gl-term">Lifecycle</span><span class="gl-def">The window during which a post continues to receive meaningful organic distribution</span></div></div></div>
+</div>
+</div><div class="page" id="page-contact">
+<div class="contact-wrap"><div class="eyebrow" style="margin-bottom:1rem">Get in touch</div><h1 class="contact-h1">Built by a <strong>practitioner</strong></h1><p class="contact-lead">HackrTools is built by Dev Das — 20+ years of GTM across Google, Adobe, SAP, LinkedIn, and IBM. Questions about the model, feature suggestions, or just want to talk growth — reach out.</p><div class="contact-links"><a class="cl" href="https://hackrtools.com" target="_blank" rel="noopener"><span class="cl-icon">🌐</span><div><div class="cl-lbl">Website</div><div class="cl-val">hackrtools.com</div></div><span class="cl-arr">↗</span></a><a class="cl" href="https://hackrlife.com" target="_blank" rel="noopener"><span class="cl-icon">✍️</span><div><div class="cl-lbl">Newsletter</div><div class="cl-val">HackrLife Daily</div></div><span class="cl-arr">↗</span></a><a class="cl" href="https://twitter.com/hackrlife" target="_blank" rel="noopener"><span class="cl-icon">𝕏</span><div><div class="cl-lbl">X / Twitter</div><div class="cl-val">@hackrlife</div></div><span class="cl-arr">↗</span></a><a class="cl" href="https://hackrlife.github.io/tools" target="_blank" rel="noopener"><span class="cl-icon">⌥</span><div><div class="cl-lbl">GitHub</div><div class="cl-val">hackrlife.github.io/tools</div></div><span class="cl-arr">↗</span></a></div><div class="built-by"><div class="by-label">About the maker</div><div class="by-name">Dev Das</div><div class="by-body">In my day job I work for Google, on AI GTM and Growth. When I am not working, I research AI systems and models. Building SaaS and agentic tools is a hobby where I productise all that I have learnt. I have done 15+ years in Growth and Product across Google, SAP, Adobe, LinkedIn and IBM — so every tool I build has a real world use case.</div></div>
+</div>
+</div><footer><span class="fl">HackrLife Media LLC</span><span class="fr">hackrtools.com · No data leaves your browser</span>
+</footer><script>
+
+const $=id=>document.getElementById(id),$$=s=>document.querySelectorAll(s);
+const show=(a,b)=>{$(a).style.display='block';$(b).style.display='none';};
+window.onload=()=>{try{sessionStorage.clear();localStorage.clear();}catch(e){}initDiag();};
+/* ── TAB SWITCHING ── */
+$('nav-tabs').addEventListener('click', e => {
+  const btn = e.target.closest('.ntab');
+  if (!btn) return;
+  $$('.ntab').forEach(b => b.classList.remove('on'));
+  $$('.page').forEach(p => p.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('page-' + btn.dataset.page).classList.add('on');
+  window.scrollTo(0,0);
+  try{sessionStorage.clear();localStorage.clear();}catch(e){}
+});
+/* ── HELPERS ── */
+function n(id){ return parseFloat(document.getElementById(id).value)||0; }
+function kCls(k){ return k>=1?'good':k>=0.5?'warn':'bad'; }
+function kLbl(k){ return k>=1?'Self-sustaining':k>=0.5?'Partial assist':'Paid-dependent'; }
+function pct(v){ return (v*100).toFixed(2)+'%'; }
+function gCls(ratio){ return ratio>=0.85?'good':ratio>=0.5?'warn':'bad'; }
+function copyText(id){
+  navigator.clipboard.writeText(document.getElementById(id).innerText).then(()=>{
+    const b=document.querySelector('.btn-copy'),o=b.textContent;
+    b.textContent='Copied'; b.style.color='var(--green)'; b.style.borderColor='var(--green)';
+    setTimeout(()=>{b.textContent=o;b.style.color='';b.style.borderColor='';},2000);
+  });
+}
+/* ════════════════════════════════
+   TAB 1 — PLAN
+   Works BACKWARDS from K target
+════════════════════════════════ */
+function runPlan(){
+  const targetK = n('p-target-k');
+  const seed    = Math.max(1, n('p-seed'));
+  const vct     = Math.max(1, n('p-vct'));
+  const share   = n('p-share')/100;
+  const imp     = n('p-imp');
+  const ctr     = n('p-ctr')/100;
+  const conv    = n('p-conv')/100;
+  const invites = n('p-invites');
+  const iconv   = n('p-iconv')/100;
+  const dens    = parseFloat($('p-density').value);
+  const res     = parseFloat($('p-resonance').value);
+  const mult    = dens * res;
+  const rawSoc  = share * imp * ctr * conv;
+  const rawNet  = invites * iconv;
+  const kSoc    = rawSoc * mult;
+  const kNet    = rawNet * mult;
+  const kActual = Math.round((kSoc + kNet) * 1000) / 1000;
+  const rawNeeded = targetK / mult;
+  const rawNetActual = rawNet;
+  const rawSocNeeded = Math.max(0, rawNeeded - rawNetActual);
+  const needCTR  = share > 0 && imp > 0 && conv > 0 ? rawSocNeeded / (share * imp * conv) : null;
+  const needConv = share > 0 && imp > 0 && ctr > 0 ? rawSocNeeded / (share * imp * ctr) : null;
+  const needShare = imp > 0 && ctr > 0 && conv > 0 ? rawSocNeeded / (imp * ctr * conv) : null;
+  const needInvites = iconv > 0 ? Math.max(0, (rawNeeded - rawSocActual()) / iconv) : null;
+  function rawSocActual(){ return share * imp * ctr * conv; }
+  const gap = kActual / targetK;
+  const gapCls = kCls(kActual);
+  const horizons = [7,14,30,60,90];
+  const projRows = horizons.map(t => {
+    const actual = kActual > 0 ? Math.round(seed * Math.pow(kActual, t/vct)) : seed;
+    const target = targetK > 0 ? Math.round(seed * Math.pow(targetK, t/vct)) : seed;
+    const diff = target - actual;
+    return `<tr><td>Day ${t}</td><td class="hi">${actual.toLocaleString()}</td><td class="target">${target.toLocaleString()}</td><td class="${diff>0?'gap-bad':'gap-good'}">${diff>0?'+'+diff.toLocaleString():diff.toLocaleString()}</td></tr>`;
+  }).join('');
+  const oPer100 = kActual >= 1 ? 'unlimited' : kActual > 0 ? Math.round(kActual/(1-kActual)*100) : 0;
+  const tPer100 = targetK >= 1 ? 'unlimited' : targetK > 0 ? Math.round(targetK/(1-targetK)*100) : 0;
+  const levers = [];
+  if(needCTR !== null && needCTR > ctr){
+    levers.push({ name:'CTR', have: pct(ctr), need: pct(needCTR), ratio: ctr/needCTR,
+      action: `Your current CTR estimate is ${pct(ctr)}. To hit K=${targetK} you need ${pct(needCTR)} — ${((needCTR/ctr-1)*100).toFixed(0)}% higher. Tactics: move the link to the first comment on LinkedIn. Rewrite the hook as a specific outcome claim. Test a plain text post with no image vs. a single striking visual.` });
+  }
+  if(needConv !== null && needConv > conv){
+    levers.push({ name:'Conversion', have: pct(conv), need: pct(needConv), ratio: conv/needConv,
+      action: `Your landing page converts at ${pct(conv)}. You need ${pct(needConv)} to hit your K target. Tactics: remove all form fields except email. Mirror the post hook in the landing page headline. Add one above-fold social proof statement.` });
+  }
+  if(needShare !== null && needShare > share){
+    levers.push({ name:'Share Rate', have: pct(share), need: pct(needShare), ratio: share/needShare,
+      action: `You estimate ${pct(share)} of users will share. You need ${pct(needShare)}. Tactics: build a shareable asset into the post (a benchmark, a framework, a result). Add an explicit share prompt as the final line. Tag 2 relevant people in the first comment.` });
+  }
+  levers.sort((a,b) => a.ratio - b.ratio);
+  const verdictCls = kActual >= targetK ? 'vg' : kActual >= targetK * 0.7 ? 'vm' : 'vb';
+  const verdictText = kActual >= targetK
+    ? `Your current estimates put you at K=${kActual} — on or above your target of K=${targetK}. You are on track. Monitor share rate and CTR after posting and run the Diagnose tab to validate.`
+    : `Your current estimates put you at K=${kActual} vs. your target of K=${targetK}. You have a gap of ${((1-gap)*100).toFixed(0)}%. The table below shows what each metric needs to be. Close the biggest gap first — usually CTR or conversion, not share rate.`;
+  const memoText = `K-FACTOR PLAN — HackrTools
+Target K: ${targetK}  ·  Current estimate: ${kActual}  ·  Gap: ${((1-gap)*100).toFixed(0)}%
+CURRENT ESTIMATES
+  Social loop: Share ${pct(share)} × ${imp} impressions × CTR ${pct(ctr)} × Conv ${pct(conv)} = K_soc ${kSoc.toFixed(3)}
+  Network loop: ${invites} invites × ${pct(iconv)} conv = K_net ${kNet.toFixed(3)}
+  Multipliers: Density ${dens.toFixed(2)}× · Resonance ${res.toFixed(2)}×
+  → K_actual = ${kActual}  (${kLbl(kActual)})
+  → Every 100 paid users generate ~${oPer100} organic
+WHAT YOU NEED TO HIT K=${targetK}
+  CTR needed (all else equal): ${needCTR ? pct(needCTR) : 'N/A'}
+  Conversion needed (all else equal): ${needConv ? pct(needConv) : 'N/A'}
+  Share Rate needed (all else equal): ${needShare ? pct(needShare) : 'N/A'}
+GROWTH PROJECTIONS (actual estimate vs. target, from ${seed} seed users)
+${horizons.map((t,i)=>{
+  const a=kActual>0?Math.round(seed*Math.pow(kActual,t/vct)):seed;
+  const tg=targetK>0?Math.round(seed*Math.pow(targetK,t/vct)):seed;
+  return `  Day ${t}: ${a.toLocaleString()} (actual) vs ${tg.toLocaleString()} (target)`;
+}).join('\n')}
+TOP LEVER TO PULL
+${levers.length ? levers[0].action : 'Your estimates already meet or exceed the target K.'}
+---
+Proxy estimates. Assumes constant loop rates.
+HackrTools K-Factor Virality Tool — hackrtools.com`;
+  $('plan-results').innerHTML=`
+<div class="out-section">Your K vs. Target</div><div class="num-grid"><div class="num-cell"><div class="num-label">Your Estimated K</div><div class="num-value ${gapCls}">${kActual}</div><div class="num-sub">${kLbl(kActual)}</div></div><div class="num-cell"><div class="num-label">Your Target K</div><div class="num-value purple">${targetK}</div><div class="num-sub">100 paid → ~${tPer100} organic</div></div><div class="num-cell"><div class="num-label">Gap</div><div class="num-value ${kActual>=targetK?'good':'bad'}">${kActual>=targetK?'✓':((1-gap)*100).toFixed(0)+'%'}</div><div class="num-sub">${kActual>=targetK?'On target':'below target'}</div></div></div><div class="verdict ${verdictCls}"><div class="verdict-label">Summary</div><div class="verdict-text">${verdictText}</div></div><div class="out-section">What Each Metric Needs to Be (to hit K=${targetK})</div><div class="gap-block"><div class="gap-row"><span class="gap-name">CTR</span><div class="gap-track"><div class="gap-fill ${gCls(ctr/(needCTR||ctr))}" style="width:${Math.min(100,(ctr/(needCTR||ctr))*100).toFixed(0)}%"></div></div><span class="gap-nums ${gCls(ctr/(needCTR||ctr))}">have ${pct(ctr)} / need ${needCTR?pct(needCTR):'—'}</span></div><div class="gap-row"><span class="gap-name">Conversion</span><div class="gap-track"><div class="gap-fill ${gCls(conv/(needConv||conv))}" style="width:${Math.min(100,(conv/(needConv||conv))*100).toFixed(0)}%"></div></div><span class="gap-nums ${gCls(conv/(needConv||conv))}">have ${pct(conv)} / need ${needConv?pct(needConv):'—'}</span></div><div class="gap-row"><span class="gap-name">Share Rate</span><div class="gap-track"><div class="gap-fill ${gCls(share/(needShare||share))}" style="width:${Math.min(100,(share/(needShare||share))*100).toFixed(0)}%"></div></div><span class="gap-nums ${gCls(share/(needShare||share))}">have ${pct(share)} / need ${needShare?pct(needShare):'—'}</span></div></div><div class="out-section">Growth Projection — Actual Estimate vs. Target</div><table class="proj-table"><thead><tr><th>Day</th><th>Estimated Users</th><th>Target Users</th><th>Gap</th></tr></thead><tbody>${projRows}</tbody></table><div class="note">Assumes constant loop rates and no market saturation. Treat as directional only.</div>
+${levers.length ? `
+<div class="out-section">Top Levers to Pull — Ranked by Gap Size</div><div class="rec-list">
+${levers.slice(0,3).map((l,i)=>`
+<div class="rec r${i+1}"><div class="rec-rank">Priority ${i+1} — ${l.name}</div><div class="rec-title">You have ${l.have}. You need ${l.need}.</div><div class="rec-body">${l.action}</div></div>`).join('')}
+</div>` : ''}
+<div class="memo"><div class="memo-head"><span class="memo-title">Plan Memo</span><button class="btn-copy" onclick="copyText('plan-memo')">Copy</button></div><div class="memo-body" id="plan-memo">${memoText}</div></div>
+`;
+  $('plan-idle').style.display='none';
+  $('plan-results').style.display='block';
+}
+function resetPlan(){
+  ['p-target-k','p-seed','p-vct','p-share','p-imp','p-ctr','p-conv','p-invites','p-iconv'].forEach((id,i)=>{
+    const def=[0.4,100,7,10,300,2.0,10,1.5,20];
+    document.getElementById(id).value=def[i];
+  });
+  $('p-density').value=1; $('p-dv').textContent='1.00×';
+  $('p-resonance').value=1; $('p-rv').textContent='1.00×';
+  $('plan-results').style.display='none';
+  $('plan-idle').style.display='';
+}
+/* ════════════════════════════════
+   TAB 2 — DIAGNOSE
+   Real post data → forward projection
+════════════════════════════════ */
+const CHANNELS = {
+  linkedin:  { peak:18, end:72,  label:'LinkedIn',          desc:'<strong>LinkedIn:</strong> Posts peak at ~18h. Distribution continues for up to 72h if early engagement is strong. After 72h, organic reach is negligible.' },
+  twitter:   { peak:2,  end:24,  label:'X / Twitter',       desc:'<strong>X / Twitter:</strong> Posts peak within 1-2 hours. Essentially done by hour 6. Threads and active replies can extend to ~24h.' },
+  instagram: { peak:6,  end:48,  label:'Instagram',         desc:'<strong>Instagram:</strong> Feed posts peak at 2-6h. Reels can sustain reach for 48h+. Stories die at 24h.' },
+  email:     { peak:4,  end:72,  label:'Email',             desc:'<strong>Email:</strong> Open rates peak at 1-4h post-send. 80%+ of opens occur within 24h. Clicks trickle for up to 72h.' },
+  web:       { peak:48, end:168, label:'Website / SEO',     desc:'<strong>Website / SEO:</strong> New content takes 48-72h to index. Ranking builds over weeks. This models the initial organic traffic spike only.' },
+  downloads: { peak:24, end:168, label:'App Downloads',     desc:'<strong>App Downloads:</strong> Download spikes from a content push typically peak in the first 24h with a long tail over 7 days.' },
+  referral:  { peak:48, end:336, label:'Referral Loop',     desc:'<strong>Referral Loop:</strong> Each new user is also a potential referrer. Lifecycle is measured in weeks. This models the first-generation referral burst.' },
+  paid:      { peak:0,  end:720, label:'Paid Ads',          desc:'<strong>Paid Ads:</strong> No organic lifecycle. Reach runs as long as budget. Model tracks CTR and conversion decay as audience saturates — typically 3-7 days.' },
+};
+let activeCh = 'linkedin';
+function selCh(btn){
+  $$('.ch').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  activeCh = btn.dataset.ch;
+  updateChDesc();
+  updateLC();
+}
+function updateChDesc(){
+  const ch = CHANNELS[activeCh];
+  $('ch-desc').innerHTML = ch.desc;
+  $('lc-peak-lbl').textContent = `Peak (~${ch.peak}h)`;
+  const endLabel = ch.end > 500 ? 'End (ongoing)' : `End (~${ch.end}h)`;
+  $('lc-end-lbl').textContent = endLabel;
+}
+function updateLC(){
+  const ch = CHANNELS[activeCh];
+  const hrs = parseFloat($('d-hours').value)||0;
+  const endHrs = Math.min(ch.end, 336);
+  const pctVal = Math.min(100, (hrs/endHrs)*100);
+  $('lc-fill').style.width = pctVal.toFixed(1)+'%';
+  $('lc-pct').textContent = pctVal.toFixed(0)+'% through lifecycle';
+  const rem = Math.max(0, endHrs - hrs);
+  $('lc-rem').textContent = rem > 0 ? `~${rem.toFixed(0)}h remaining` : 'Lifecycle complete';
+}
+function initDiag(){
+  updateChDesc();
+  updateLC();
+}
+function runDiag(){
+  const ch      = CHANNELS[activeCh];
+  const hrs     = Math.max(0.5, n('d-hours'));
+  const imp     = n('d-imp');
+  const clicks  = n('d-clicks');
+  const convs   = n('d-conv');
+  const shares  = n('d-shares');
+  const seed    = Math.max(1, n('d-seed'));
+  const tCTR    = n('d-tctr')/100;
+  const tConv   = n('d-tconv')/100;
+  const realCTR  = imp > 0 ? clicks/imp : 0;
+  const realConv = clicks > 0 ? convs/clicks : 0;
+  const shareRate = shares/seed;
+  const endHrs = Math.min(ch.end, 336);
+  const lifePct = Math.min(1, hrs/endHrs);
+  const peakPct = ch.peak > 0 ? Math.min(0.9, ch.peak/endHrs) : 0.05;
+  let projMult;
+  if(hrs <= ch.peak || ch.peak === 0){
+    const preCapture = peakPct > 0 ? (lifePct/peakPct) : 1;
+    projMult = 1 / Math.max(0.01, preCapture * 0.6);
+  } else {
+    const postFrac = (lifePct - peakPct) / Math.max(0.01, 1 - peakPct);
+    projMult = 1 / Math.max(0.01, 0.6 + postFrac * 0.4);
+  }
+  projMult = Math.max(1, Math.min(projMult, 10));
+  const projImp    = Math.round(imp * projMult);
+  const projClicks = Math.round(clicks * projMult);
+  const projConvs  = Math.round(convs * projMult);
+  const projShares = Math.round(shares * projMult);
+  const avgImpPerShare = projShares > 0 ? projImp/projShares : imp;
+  const kSocPost = shareRate * avgImpPerShare * realCTR * realConv;
+  const kNetPost = 0;
+  const kPost = Math.round((kSocPost + kNetPost) * 1000) / 1000;
+  const ctrRatio  = tCTR > 0 ? realCTR/tCTR : 1;
+  const convRatio = tConv > 0 ? realConv/tConv : 1;
+  const wiCTR   = Math.round(projImp * tCTR * realConv);
+  const wiBoth  = Math.round(projImp * tCTR * tConv);
+  const gaps = [
+    { name:'CTR', ratio: ctrRatio, have: pct(realCTR), target: pct(tCTR) },
+    { name:'Conversion', ratio: convRatio, have: pct(realConv), target: pct(tConv) },
+    { name:'Share Rate', ratio: shares >= 5 ? 1 : shares > 0 ? shares/5 : 0, have: shares+' shares', target: '5+ shares' },
+  ].sort((a,b)=>a.ratio-b.ratio);
+  const recTemplates = {
+    CTR: {
+      title: 'Rewrite the hook — CTR is your biggest gap',
+      body: `Real CTR is ${pct(realCTR)} vs. your ${pct(tCTR)} target. Most impressions are seeing your post and not clicking. For the next post: test a specific outcome claim in the first line instead of a generic observation. Move the link out of the post body (first comment on LinkedIn, reply on X). A/B test plain text vs. a single strong image.`,
+      impact: `Hitting target CTR would project ~${wiCTR} end-of-lifecycle signups vs. ${projConvs} at current rates`
+    },
+    Conversion: {
+      title: 'Fix the landing page — clicks are not converting',
+      body: `Real conversion is ${pct(realConv)} vs. your ${pct(tConv)} target. People are clicking but not signing up. The post promise and landing page are misaligned. For the next post: make the landing page headline mirror the post hook exactly. Remove all fields except email. Add one line of social proof above the fold.`,
+      impact: `Hitting both targets would project ~${wiBoth} end-of-lifecycle signups vs. ${projConvs} at current rates`
+    },
+    'Share Rate': {
+      title: 'Build shareability into the post — broadcast loop is weak',
+      body: `Only ${shares} shares from ${seed} seed users — that is a share rate of ${pct(shareRate)}. The broadcast loop is generating very little K. For the next post: include a shareable asset (a benchmark, a visual framework, a surprising stat). End with an explicit share prompt. Tag 2 people who would genuinely find it useful.`,
+      impact: `Doubling the share rate would roughly double K_social contribution from this channel`
+    }
+  };
+  const recs = gaps.filter(g=>g.ratio<0.85).slice(0,3).map((g,i)=>({
+    cls:`r${i+1}`, rank: i+1,
+    ...recTemplates[g.name]
+  }));
+  const isPastPeak = hrs > ch.peak && ch.peak > 0;
+  const timingRec = isPastPeak
+    ? `You are ${(hrs-ch.peak).toFixed(0)}h past the ${ch.label} peak. New organic reach will be minimal from this post. For the next post on ${ch.label}: ${activeCh==='linkedin'?'schedule for Tuesday-Thursday 8-10am in your audience timezone and engage every comment within the first 2 hours':'schedule for when your audience is most active and reply to every comment in the first hour'}.`
+    : `You are ${hrs}h in and still ${(ch.peak-hrs).toFixed(0)}h from the ${ch.label} peak. You still have meaningful distribution ahead. Engage every comment now — the algorithm rewards dwell time and replies in the pre-peak window.`;
+  if(recs.length < 3) recs.push({ cls:'r'+(recs.length+1), rank:recs.length+1, title:'Optimise your posting window', body:timingRec, impact:`${ch.label} lifecycle: ${Math.round(lifePct*100)}% complete · ~${Math.max(0,endHrs-hrs).toFixed(0)}h remaining` });
+  const memoText = `K-FACTOR DIAGNOSE — HackrTools
+Channel: ${ch.label}  ·  ${hrs}h elapsed  ·  ${Math.round(lifePct*100)}% through lifecycle
+REAL OBSERVED RATES (back-calculated)
+  CTR: ${pct(realCTR)} (target: ${pct(tCTR)}) — ${ctrRatio>=1?'on target':((1-ctrRatio)*100).toFixed(0)+'% below target'}
+  Conversion: ${pct(realConv)} (target: ${pct(tConv)}) — ${convRatio>=1?'on target':((1-convRatio)*100).toFixed(0)+'% below target'}
+  Share Rate: ${pct(shareRate)} (${shares} shares from ${seed} users)
+  → K this post: ${kPost.toFixed(3)} (${kLbl(kPost)})
+END-OF-LIFECYCLE PROJECTION (${projMult.toFixed(1)}× extrapolation)
+  Impressions: ~${projImp.toLocaleString()}
+  Clicks: ~${projClicks.toLocaleString()}
+  Signups (at real rates): ~${projConvs.toLocaleString()}
+  Signups (if CTR hit target): ~${realCTR < tCTR ? wiCTR.toLocaleString() : 'CTR already on target'}
+  Signups (if both hit target): ~${(realCTR < tCTR || realConv < tConv) ? wiBoth.toLocaleString() : 'Both already on target'}
+NEXT POST RECOMMENDATIONS
+${recs.map((r,i)=>`  ${i+1}. ${r.title}\n     ${r.body}`).join('\n')}
+---
+Proxy projections. Assumes constant decay from observed point.
+HackrTools K-Factor Virality Tool — hackrtools.com`;
+  $('diag-results').innerHTML=`
+<div class="out-section">Real K from This Post</div><div class="num-grid"><div class="num-cell"><div class="num-label">Real CTR</div><div class="num-value ${gCls(ctrRatio)}">${pct(realCTR)}</div><div class="num-sub">target ${pct(tCTR)} · ${ctrRatio>=1?'on target':((ctrRatio)*100).toFixed(0)+'% of target'}</div></div><div class="num-cell"><div class="num-label">Real Conversion</div><div class="num-value ${gCls(convRatio)}">${pct(realConv)}</div><div class="num-sub">target ${pct(tConv)} · ${convRatio>=1?'on target':((convRatio)*100).toFixed(0)+'% of target'}</div></div><div class="num-cell"><div class="num-label">K — This Post</div><div class="num-value ${kCls(kPost)}">${kPost.toFixed(3)}</div><div class="num-sub">${kLbl(kPost)}</div></div></div><div class="out-section">Gap vs. Your Targets</div><div class="gap-block"><div class="gap-row"><span class="gap-name">CTR</span><div class="gap-track"><div class="gap-fill ${gCls(ctrRatio)}" style="width:${Math.min(100,ctrRatio*100).toFixed(0)}%"></div></div><span class="gap-nums ${gCls(ctrRatio)}">real ${pct(realCTR)} / target ${pct(tCTR)}</span></div><div class="gap-row"><span class="gap-name">Conversion</span><div class="gap-track"><div class="gap-fill ${gCls(convRatio)}" style="width:${Math.min(100,convRatio*100).toFixed(0)}%"></div></div><span class="gap-nums ${gCls(convRatio)}">real ${pct(realConv)} / target ${pct(tConv)}</span></div><div class="gap-row"><span class="gap-name">Share Rate</span><div class="gap-track"><div class="gap-fill ${gCls(Math.min(1,shareRate/0.1))}" style="width:${Math.min(100,shareRate/0.1*100).toFixed(0)}%"></div></div><span class="gap-nums ${gCls(Math.min(1,shareRate/0.1))}">${shares} shares from ${seed} users (${pct(shareRate)})</span></div></div><div class="out-section">Forward Projection to End of Lifecycle</div><table class="proj-table"><thead><tr><th>Scenario</th><th>Impressions</th><th>Clicks</th><th>Signups</th></tr></thead><tbody><tr><td>Now (${hrs}h actual)</td><td>${imp.toLocaleString()}</td><td>${clicks.toLocaleString()}</td><td class="hi">${convs.toLocaleString()}</td></tr><tr><td>End of lifecycle (at real rates)</td><td>${projImp.toLocaleString()}</td><td>${projClicks.toLocaleString()}</td><td class="hi">${projConvs.toLocaleString()}</td></tr>
+${realCTR < tCTR ? `<tr><td>If CTR hit target (${pct(tCTR)})</td><td>${projImp.toLocaleString()}</td><td>${Math.round(projImp*tCTR).toLocaleString()}</td><td class="target">${wiCTR.toLocaleString()}</td></tr>` : `<tr><td style="color:var(--green)">CTR on target ✓</td><td>${projImp.toLocaleString()}</td><td>${projClicks.toLocaleString()}</td><td class="hi">${projConvs.toLocaleString()}</td></tr>`}
+${(realCTR < tCTR || realConv < tConv) ? `<tr><td>If CTR + Conv both hit target</td><td>${projImp.toLocaleString()}</td><td>${Math.round(projImp*tCTR).toLocaleString()}</td><td class="target">${wiBoth.toLocaleString()}</td></tr>` : `<tr><td style="color:var(--green)">Conversion on target ✓</td><td>—</td><td>—</td><td class="hi">—</td></tr>`}
+</tbody></table><div class="note">Lifecycle extrapolation assumes ${projMult.toFixed(1)}× multiplier based on ${Math.round(lifePct*100)}% elapsed on ${ch.label}. Treat as directional only.</div>
+${recs.length ? `
+<div class="out-section">Next Post Recommendations — Ranked by Impact</div><div class="rec-list">
+${recs.map(r=>`
+<div class="rec ${r.cls}"><div class="rec-rank">Priority ${r.rank}</div><div class="rec-title">${r.title}</div><div class="rec-body">${r.body}</div><div class="rec-impact">${r.impact}</div></div>`).join('')}
+</div>` : `<div class="verdict vg" style="margin-top:1rem"><div class="verdict-label">All metrics on target</div><div class="verdict-text">Your real CTR and conversion are both at or above target. The main lever now is increasing share rate and seed volume.</div></div>`}
+<div class="memo"><div class="memo-head"><span class="memo-title">Diagnose Memo</span><button class="btn-copy" onclick="copyText('diag-memo')">Copy</button></div><div class="memo-body" id="diag-memo">${memoText}</div></div>
+`;
+  $('diag-idle').style.display='none';
+  $('diag-results').style.display='block';
+}
+function resetDiag(){
+  ['d-hours','d-imp','d-clicks','d-conv','d-shares','d-seed','d-tctr','d-tconv'].forEach((id,i)=>{
+    const def=[6,800,22,4,6,200,2.5,12];
+    document.getElementById(id).value=def[i];
+  });
+  $('diag-results').style.display='none';
+  $('diag-idle').style.display='';
+  updateLC();
+}
+
+</script>
+</body>
+</html>
